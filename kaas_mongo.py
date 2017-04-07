@@ -5,6 +5,7 @@ import pandas as pd
 import sys
 import os
 import datetime
+import insert_metadata as metadata
 
 from pymongo import MongoClient
 
@@ -24,74 +25,92 @@ if '--help' in args:
     print 'Script: Insert a kaas output into the Mongo metagenomic database.'
     print 'Author: Leandro Correa - @hscleandro'
     print 'Date: 14.03.2017\n'
-    print 'How to use: python kaas_mongo.py -i INPUT_KAAS -s SAMPLE_NAME -t TYPE_OF_SEQUENCE -d DATE_OF_ANALYSIS -time\n'
-    print 'INPUT_KAAS [required]: File containing the kaas output.'
-    print 'SAMPLE_NAME [required]: Name of sample.'
-    print 'TYPE_OF_SEQUENCE [required]: Type of sequence (read, contig, scafold).'
-    print 'DATE_OF_ANALYSIS [required]: Date of tool execution.'
-    print '-time [optional]: Details the execution time of the sample.'
-    print '\nInput file format: The kaas output must contain 2 fields:'
+    print 'How to use: python kaas_mongo.py -i INPUT_KAAS'
+    print 'INPUT_KAAS [required]: File containing the kaas output in .csv format file Containing two fields in the table header:'
     print '1- Sequence ID'
-    sys.exit('2- Ko familie')
+    print '2- Ko familie\n\n'
+    print 'IMPORTANT: Input file must be accompanied (in the same directory) from a .csv file called "metadata.csv". ' \
+          'The metadata.csv file must contain two columns titled: index and Requirement, as in the example:\n'
+
+    print '+-----------------------------------+\n' \
+          '|     index        |  Requirement   |\n' \
+          '+------------------+----------------+\n' \
+          '|   sample_name    |    AM001       |\n' \
+          '+------------------+----------------+\n' \
+          '|   type_sequence  |    contig      |\n' \
+          '+------------------+----------------+\n' \
+          '|   project        |    XPTO        |\n' \
+          '+------------------+----------------+\n'
+
+    sys.exit(
+        'The fields: sample_name, type_sequence and project are required, followed by other metadata that make up the sample.')
+
 
 else:
     if '-i' in args:
         PATH_kaas = args[args.index('-i') + 1]
+        split = str.split(PATH_kaas, '/')
+        PATH = ''
+        for s in range(1, len(split[:-1])):
+            PATH = PATH + '/' + split[s]
+        PATH += '/'
 
-        if '-s' in args:
-            sample = args[args.index('-s') + 1]
-        else:
-            sample = 'null'
-        if '-t' in args:
-            type_seq = args[args.index('-t') + 1]
-        else:
-            type_seq = 'null'
-        if '-d' in args:
-            date = args[args.index('-d') + 1]
-        else:
-            date = 'null'
-        if '-time' in args:
-            print_time = True
+        directorie = os.listdir(PATH)
+        if 'metadata.csv' in directorie or '-m' in args:
+            if '-time' in args:
+                print_time = True
+            if '-m' in args:
+                PATH_metadata = args[args.index('-m') + 1]
+            else:
+                PATH_metadata = PATH + 'metadata.csv'
 
-        client = MongoClient('localhost', 7755)
-        db = client.local
-        collection = db.sequences
+            client = MongoClient('localhost', 7755)
+            db = client.local
+            collection = db.sequences
 
-        columns = ['read_id',
-                   'ko'
-                   ]
+            columns = ['read_id',
+                       'ko'
+                       ]
 
-        kaas_df = pd.read_csv(PATH_kaas, sep="\t", names=columns)
+            kaas_df = pd.read_csv(PATH_kaas, sep="\t", names=columns)
+            metadata_df = pd.read_csv(PATH_metadata, sep=",")
 
-        # i = 2
-        for i in range(0, len(kaas_df.index)):
-            sequence_split = str.split(kaas_df.iloc[i]['read_id'], "_")
-            read_id = kaas_df.iloc[i]['read_id']
-            ko = kaas_df.iloc[i]['ko']
-            if sample != 'null' and type_seq != 'null' and date != 'null':
+            data = {}
+
+            for i in range(0, len(metadata_df.index)):
+                key = metadata_df.iloc[i]['index']
+                kwargs = metadata_df.iloc[i]['Requirement']
+                data[key] = kwargs
+
+            sample = data.get('sample_name')
+            update = metadata.mongo_insert(PATH_metadata)
+
+            # i = 2
+            for i in range(0, len(kaas_df.index)):
+                sequence_split = str.split(kaas_df.iloc[i]['read_id'], "_")
+                read_id = kaas_df.iloc[i]['read_id']
+                ko = kaas_df.iloc[i]['ko']
+
                 update = collection.update({'id_seq': read_id},
-                                          {'$set': {'kegg_ko': str(ko),
+                                           {'$set': {'kegg_ko': str(ko),
                                                      },
                                            }, upsert=False)
+
                 if not update.get('updatedExisting'):
                     item = {'id_sample': sample,
                             'id_seq': read_id,
-                            'type_of_seq': type_seq,
-                            'date': date,
                             'kegg_ko': str(ko)
                             }
                     ObjectId = collection.insert(item)
-            else:
-                print '\nPlease enter the fields: date, ' \
-                      'type of sequence and name of the sample.\n'
-                print "Use: python kaiju_mongo.py --help for details."
-                break
 
-            if i % 1000 == 0 and print_time:
-                time_end = datetime.datetime.now()
-                time = time_end - time_init_2
-                print str(i) + ' ' + read_id + "  time: " + str(time)
-                time_init_2 = time_end
+                if i % 1000 == 0 and print_time:
+                    time_end = datetime.datetime.now()
+                    time = time_end - time_init_2
+                    print str(i) + ' ' + read_id + "  time: " + str(time)
+                    time_init_2 = time_end
+        else:
+            print '\nMetadata.csv file not found.'
+            sys.exit('Use -m to set the metadata adress file or write python kaiju_mongo.py --help, for details.')
     else:
         sys.exit(
             "\n\nErro: Parameter -i required for script execution. \n\nUse: python kaiju_mongo.py --help for details.\n"
