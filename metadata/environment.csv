@@ -1,0 +1,45 @@
+"index","Requirement","Format","Terms","Description"
+"sample_name","M","{text}","Jones99.built.environment.1",
+"taxon_id","M","{integer}",,
+"scientific_name","M","{text}",,
+"host_subject_id","M","{text}",,
+"description","M","{text}",,
+"physical_specimen_location","M","{text}",,
+"physical_specimen_remaining","M","{boolean}",,
+"collection_timestamp","M","yyyy-mm-dd hh:mm",,
+"latitude","M","{decimal degrees}",,
+"longitude","M","{decimal degrees}",,
+"investigation_type","M","{term}","metagenome",
+"project_name","M","{text}",,
+"experimental_factor","X","{term, text}",,
+"geo_loc_name","M","GAZ:{term}",,
+"env_biome","M","ENVO:{term}",,
+"env_feature","M","ENVO:{term}",,
+"env_material","M","ENVO:{term}",,
+"env_package","M","{term}","built environment",
+"surf_material","E","[concrete|wood|stone|tile|plastic|glass|vinyl|metal|carpet|stainless steel|paint|cinder blocks|hay bales|stucco|adobe]","surface material","surface materials at the point of sampling"
+"surf_air_cont","E","[dust|organic matter|particulate matter|volatile organic compounds|biological contaminants|radon|nutrients|biocides]","surface-air contaminant","contaminant identified on surface"
+"rel_air_humidity","M","{float} {unit} [%]","relative air humidity","partial vapor and air pressure, density of the vapor and air, or by the actual mass of the vapor and air"
+"abs_air_humidity","M","{float} {unit} [kg|lb]","absolute air humidity","actual mass of water vapor - mh20 - present in the air water vapor mixture"
+"surf_humidity","E","{float} {unit} [%]","surface humidity","surfaces: water activity as a function of air and material moisture"
+"air_temp","M","{float} {unit} [deg C]","air temperature","temperature of the air at the time of sampling"
+"surf_temp","E","{float} {unit} [deg C]","surface temperature","temperature of the surface at the time of sampling"
+"surf_moisture_ph","E","{integer [0-14]}","surface moisture pH ","pH measurement of surface"
+"build_occup_type","M","[airport|agricultural|commercial|educational|government|health care|high rise|industrial|low rise|market|military|office|parking|residential|restaurant|school|sports complex|storage|religious|transport|high rise|wood framed]","building occupancy type ","the primary function for which a building or discrete part of a building is intended to be used"
+"surf_moisture","E","{float} {unit}","surface moisture","water held on a surface"
+"dew_point","X","{float} {unit} [deg C]","dew point ","the temperature to which a given parcel of humid air must be cooled, at constant barometric pressure, for water vapor to condense into water. "
+"carb_dioxide","M","{float} {unit}","carbon dioxide","carbon dioxide (gas) amount or concentration at the time of sampling"
+"ventilation_type","M","{text}","ventilation type","ventilation system used in the sampled premises"
+"organism_count","M","{text};{float} {unit}","organism count","total count of any organism per gram or volume of sample, should include name of organism followed by count; can include multiple organism counts"
+"indoor_space","M","[bedroom|office|bathroom|foyer|kitchen|locker room|hallway|elevator]","indoor space ","a distinguishable space within a structure, the purpose for which discrete areas of a building is used"
+"indoor_surf","E","[counter top|window|wall|cabinet|ceiling|door|shelving|vent cover]","indoor surface","type of indoor surface"
+"filter_type","M","[chemical air filter|electrostatic air treatment|gas-phase air treatment|HEPA filter|low-MERV pleated media|particulate air filter|ultraviolet air treatment]","filter type","a device which removes solid particulates or airborne molecular contaminants"
+"heat_cool_type","M","[radiant system|heat pump|forced air system|steam forced heat|wood stove]","heating and cooling system type","methods of conditioning or heating a room or building"
+"substructure_type","X","[crawlspace|slab on grade|basement]","substructure type ","the substructure or under building is that largely hidden section of the building which is built off the foundations to the ground floor level"
+"building_setting","M","[exurban|rural|suburbanlurban]","building setting","a location (geography) where a building is set"
+"light_type","M","[natural light|electric light|no light]","light type","application of light to achieve some practical or aesthetic effect. Lighting includes the use of both artificial light sources such as lamps and light fixtures, as well as natural illumination by capturing daylight. Can also include absence of light"
+"samp_sort_meth","X","open face filter collecting total suspended particles, ""prefilter to remove particles larger than X micrometers in diameter, where common values of X would be 10 and 2.5 full size sorting in a cascade impactor""","sample size sorting method","method by which samples are sorted"
+"space_typ_state","M","[typical occupied|typically unoccupied]","space typical state ","customary or normal state of the space"
+"typ_occupant_dens","M","{float}","typical occupant density","customary or normal density of occupants"
+"occup_samp","M","{integer}","occupancy at sampling","number of occupants present at time of sample within the given space"
+"occupant_dens_samp","M","{float}","occupant density at sampling","average number of occupants at time of sampling per square footage"

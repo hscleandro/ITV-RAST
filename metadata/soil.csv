@@ -1,0 +1,72 @@
+"index","Requirement","Format","Term","Description"
+"sample_name","M","{text}",,
+"taxon_id","M","{integer}",,
+"scientific_name","M","{text}",,
+"host_subject_id","M","{text}",,
+"description","M","{text}",,
+"physical_specimen_location","M","{text}",,
+"physical_specimen_remaining","M","{boolean}",,
+"collection_timestamp","M","yyyy-mm-dd hh:mm",,
+"latitude","M","{decimal degrees}",,
+"longitude","M","{decimal degrees}",,
+"investigation_type","M","{term}","metagenome",
+"project_name","M","{text}",,
+"experimental_factor","X","{term, text}",,
+"geo_loc_name","M","GAZ:{term}",,
+"env_biome","M","ENVO:{term}",,
+"env_feature","M","ENVO:{term}",,
+"env_material","M","ENVO:{term}",,
+"env_package","M","{term}","soil",
+"alt","C","{float} m","altitude","the altitude of the sample is the vertical distance between Earth's surface above sea level and the sampled position in the air"
+"depth","M","{float} m","depth","depth is defined as the vertical distance below local surface, e.g. for sediment or soil samples depth is measured from sediment or soil surface, respectivly. Depth can be reported as an interval for subsurface samples"
+"elev","M","{float} {unit}","elevation","the elevation of the sampling site as measured by the vertical distance from mean sea level"
+"cur_land_use","X","[cities|farmstead|industrial areas|roads/railroads|rock|sand|gravel|mudflats|salt flats|badlands|permanent snow or ice|saline seeps|mines/quarries|oil waste areas|small grains|row crops|vegetable crops|horticultural plants (e.g. tulips)|marshlands (grass,sedges,rushes)|tundra (mosses,lichens)|rangeland|pastureland (grasslands used for livestock grazing)|hayland|meadows (grasses,alfalfa,fescue,bromegrass,timothy)|shrub land (e.g. mesquite,sage-brush,creosote bush,shrub oak,eucalyptus)|successional shrub land (tree saplings,hazels,sumacs,chokecherry,shrub dogwoods,blackberries)|shrub crops (blueberries,nursery ornamentals,filberts)|vine crops (grapes)|conifers (e.g. pine,spruce,fir,cypress)|hardwoods (e.g. oak,hickory,elm,aspen)|intermixed hardwood and conifers|tropical (e.g. mangrove,palms)|rainforest (evergreen forest receiving >406 cm annual rainfall)|swamp (permanent or semi-permanent water body dominated by woody plants)|crop trees (nuts,fruit,christmas trees,nursery trees)]","current land use","present state of sample site"
+"cur_vegetation","X","{text}","current vegetation","vegetation classification from one or more standard classification systems, or agricultural crop"
+"cur_vegetation_meth","X","{PMID|DOI|URL}","current vegetation method","reference or method used in vegetation classification "
+"previous_land_use","X","{text};{timestamp}","history/previous land use","previous land use and dates"
+"previous_land_use_meth","X","{PMID|DOI|URL}","history/previous land use method","reference or method used in determining previous land use and dates"
+"crop_rotation","X","{boolean};Rn/{timestamp}/{period}","history/crop rotation","whether or not crop is rotated, and if yes, rotation schedule"
+"agrochem_addition","X","{text};{float} {unit};{timestamp}","history/agrochemical additions","addition of fertilizers, pesticides, etc. - amount and time of applications"
+"tillage","X","[drill|cutting disc|ridge till|strip tillage|zonal tillage|chisel|tined|mouldboard|disc plough]","history/tillage","note method(s) used for tilling"
+"fire","X","{timestamp}","history/fire","historical and/or physical evidence of fire"
+"flooding","X","{timestamp}","history/flooding","historical and/or physical evidence of flooding"
+"extreme_event","X","{timestamp}","history/extreme events","unusual physical events that may have affected microbial populations"
+"horizon","X","[O horizon|A horizon|E horizon|B horizon|C horizon|R layer|Permafrost]","horizon","specific layer in the land area which measures parallel to the soil surface and possesses physical characteristics which differ from the layers above and beneath"
+"horizon_meth","X","{PMID|DOI|URL}","horizon method","reference or method used in determining the horizon"
+"sieving","X","{{text}|{float} {unit}};{float} {unit}","composite design/sieving (if any)","collection design of pooled samples and/or sieve size and amount of sample sieved "
+"water_content","X","{float} {unit}","water content","water content measurement"
+"water_content_soil_meth","X","{PMID|DOI|URL}","water content method","reference or method used in determining the water content of soil"
+"samp_vol_we_dna_ext","X","{float} {unit}","sample volume or weight for DNA extraction","volume (mL) or weight (g) of sample processed for DNA extraction"
+"pool_dna_extracts","X","{boolean};{float} {unit}","pooling of DNA extracts (if done)","were multiple DNA extractions mixed? how many?"
+"store_cond","X","{text};{period}","storage conditions (fresh/frozen/other)","explain how and for how long the soil sample was stored before DNA extraction."
+"link_climate_info","X","{PMID|DOI|URL}","link to climate information","link to climate resource"
+"annual_season_temp","X","{float} {unit}","mean annual and seasonal temperature","mean annual and seasonal temperature"
+"annual_season_precpt","X","{float} {unit}","mean annual and seasonal precipitation","mean annual and seasonal precipitation"
+"link_class_info","X","{PMID|DOI|URL}","link to classification information","link to digitized soil maps or other soil classification information"
+"fao_class","X","{term}","soil_taxonomic/FAO classification","soil classification from the FAO World Reference Database for Soil Resources. The list can be found at http://www.fao.org/nr/land/sols/soil/wrb-soil-maps/reference-groups"
+"local_class","X","{text}","soil_taxonomic/local classification","soil classification based on local soil classification system"
+"local_class_meth","X","{PMID|DOI|URL}","soil_taxonomic/local classification method","reference or method used in determining the local soil classification "
+"soil_type","X","{text}","soil type","soil series name or other lower-level classification"
+"soil_type_meth","X","{PMID|DOI|URL}","soil type method","reference or method used in determining soil series name or other lower-level classification"
+"slope_gradient","X","{float} {unit}","slope gradient","commonly called 'slope'. The angle between ground surface and a horizontal line (in percent). This is the direction that overland water would flow. This measure is usually taken with a hand level meter or clinometer"
+"slope_aspect","X","{float} {unit}","slope aspect","the direction a slope faces. While looking down a slope use a compass to record the direction you are facing (direction or degrees); e.g., NW or 315 degrees. This measure provides an indication of sun and wind exposure that will influence soil temperature and evapotranspiration."
+"profile_position","X","[summit|shoulder|backslope|footslope|toeslope]","profile position","cross-sectional position in the hillslope where sample was collected.sample area position in relation to surrounding areas"
+"drainage_class","X","[very poorly|poorly|somewhat poorly|moderately well|well|excessively drained]","drainage classification","drainage classification from a standard system such as the USDA system"
+"texture","X","{float} {unit}","texture","the relative proportion of different grain sizes of mineral particles in a soil, as described using a standard system; express as % sand (50 um to 2 mm), silt (2 um to 50 um), and clay (<2 um) with textural name (e.g., silty clay loam) optional."
+"texture_meth","X","{PMID|DOI|URL}","texture method","reference or method used in determining soil texture"
+"ph","X","{float}","pH","pH measurement"
+"ph_meth","X","{PMID|DOI|URL}","pH method","reference or method used in determining pH"
+"tot_org_carb","X","{float} {unit}","total organic carbon","Definition for soil: total organic carbon content of the soil, definition otherwise: total organic carbon content"
+"tot_org_c_meth","X","{PMID|DOI|URL}","total organic carbon method","reference or method used in determining total organic carbon"
+"tot_nitro","X","{float} {unit}","total nitrogen","total nitrogen content of the sample"
+"tot_n_meth","X","{PMID|DOI|URL}","total nitrogen method","reference or method used in determining the total nitrogen"
+"microbial_biomass","X","{float} {unit}","microbial biomass","the part of the organic matter in the soil that constitutes living microorganisms smaller than 5-10 micrometer. If you keep this, you would need to have correction factors used for conversion to the final units"
+"microbial_biomass_meth","X","{PMID|DOI|URL}","microbial biomass method","reference or method used in determining microbial biomass"
+"link_addit_analys","X","{PMID|DOI|URL}","links to additional analysis","link to additional analysis results performed on the sample"
+"extreme_salinity","X","{float} {unit}","extreme_unusual_properties/salinity","measured salinity "
+"salinity_meth","X","{PMID|DOI|URL}","extreme_unusual_properties/salinity method","reference or method used in determining salinity"
+"heavy_metals","X","{text};{float} {unit}","extreme_unusual_properties/heavy metals","heavy metals present and concentrationsany drug used by subject and the frequency of usage; can include multiple heavy metals and concentrations"
+"heavy_metals_meth","X","{PMID|DOI|URL}","extreme_unusual_properties/heavy metals method","reference or method used in determining heavy metals"
+"al_sat","X","{float} {unit}","extreme_unusual_properties/Al saturation","aluminum saturation (esp. for tropical soils)"
+"al_sat_meth","X","{PMID|DOI|URL}","extreme_unusual_properties/Al saturation method","reference or method used in determining Al saturation"
+"misc_param","X","{text};{float} {unit}","miscellaneous parameter","any other measurement performed or parameter collected, that is not listed here"
