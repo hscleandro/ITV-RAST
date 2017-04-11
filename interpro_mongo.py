@@ -4,15 +4,12 @@
 import pandas as pd
 import sys
 import os
-import datetime
 import insert_metadata as metadata
+from progressbar.progressbar import *
 
 from pymongo import MongoClient
 
-time_init = datetime.datetime.now()
-time_init_2 = datetime.datetime.now()
 args = sys.argv
-print_time = False
 
 # PATH_emg = '/home/leandro/Data/metagenomas/MG_34_Emma/mgp/454ALLCONTIGS_FASTA_I5.tsv'
 
@@ -76,9 +73,13 @@ else:
                        'InterPro description',  # 13
                        'GO annotations',  # 14
                        'Pathways annotations']  # 15
+            print '\nLoading. . .\n'
+            widgets = ['Update: ', Percentage(), ' ', Bar(marker=RotatingMarker()), ' ', ETA(), ' ', FileTransferSpeed()]
 
             emg_df = pd.read_csv(PATH_emg, sep="\t", names=columns)
+            print str(len(emg_df.index)) + ' instances to be inserted in the mongo database.\n\n'
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
+            pbar = ProgressBar(widgets=widgets, maxval=len(emg_df.index) * 1000).start()
 
             data = {}
 
@@ -88,7 +89,9 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
+            project = data.get('project')
             update = metadata.mongo_insert(PATH_metadata)
+
 
             # i = 10
             for i in range(0, len(emg_df.index)):
@@ -151,6 +154,7 @@ else:
                 if not update.get('updatedExisting'):
                     item = ({'id_sample': sample,
                              'id_seq': read_id,
+                             'project': project,
                              'sequence': str(sequence),
                              'orfs_inf':
                                      [{
@@ -172,12 +176,8 @@ else:
 
                     ObjectId = collection.insert(item)
 
-                if i % 1000 == 0 and print_time:
-                    time_end = datetime.datetime.now()
-                    time = time_end - time_init_2
-                    print str(i) + ' ' + read_id + "  time: " + str(time)
-
-                    time_init_2 = time_end
+                pbar.update(1000 * i + 1)
+            pbar.finish()
         else:
             print '\nMetadata.csv file not found.'
             sys.exit('Use -m to set the metadata adress file or write python interpro_mongo.py --help, for details.')
@@ -186,8 +186,3 @@ else:
         sys.exit("\nErro: Parameter -i required for script execution. \n\nUse python interpro_mongo.py --help for details.\n")
 
 print "\n\nThe data was successfully stored."
-
-if print_time:
-    time_end = datetime.datetime.now()
-    time = time_end - time_init
-    print "time: " + str(time)

@@ -4,19 +4,12 @@
 import pandas as pd
 import sys
 import os
-import datetime
 import insert_metadata as metadata
 
 from pymongo import MongoClient
+from progressbar.progressbar import *
 
 # PATH_kaas = '/home/leandro/Data/metagenomas/MG_34_Emma/kaas/MG_34_Emma_ko_aa.txt'
-# type_seq = 'contig'
-# date = '21.03.2017'
-# sample = 'MG_34'
-
-time_init = datetime.datetime.now()
-time_init_2 = datetime.datetime.now()
-print_time = False
 
 args = sys.argv
 
@@ -71,9 +64,14 @@ else:
             columns = ['read_id',
                        'ko'
                        ]
+            print '\nLoading. . .\n'
+            widgets = ['Update: ', Percentage(), ' ', Bar(marker=RotatingMarker()), ' ', ETA(), ' ',
+                       FileTransferSpeed()]
 
             kaas_df = pd.read_csv(PATH_kaas, sep="\t", names=columns)
+            print str(len(kaas_df.index)) + ' instances to be inserted in the mongo database.\n\n'
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
+            pbar = ProgressBar(widgets=widgets, maxval=len(kaas_df.index) * 1000).start()
 
             data = {}
 
@@ -83,6 +81,7 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
+            project = data.get('project')
             update = metadata.mongo_insert(PATH_metadata)
 
             # i = 2
@@ -98,16 +97,15 @@ else:
 
                 if not update.get('updatedExisting'):
                     item = {'id_sample': sample,
+                            'project': project,
                             'id_seq': read_id,
                             'kegg_ko': str(ko)
                             }
                     ObjectId = collection.insert(item)
 
-                if i % 1000 == 0 and print_time:
-                    time_end = datetime.datetime.now()
-                    time = time_end - time_init_2
-                    print str(i) + ' ' + read_id + "  time: " + str(time)
-                    time_init_2 = time_end
+                pbar.update(1000 * i + 1)
+            pbar.finish()
+
         else:
             print '\nMetadata.csv file not found.'
             sys.exit('Use -m to set the metadata adress file or write python kaiju_mongo.py --help, for details.')
@@ -117,8 +115,3 @@ else:
         )
 
     print "\n\nThe data was successfully stored."
-
-if print_time:
-    time_end = datetime.datetime.now()
-    time = time_end - time_init
-    print "total time: " + str(time)

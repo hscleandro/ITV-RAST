@@ -8,17 +8,12 @@ import sys
 import os
 import datetime
 import insert_metadata as metadata
+from progressbar.progressbar import *
+import subprocess
 
 from pymongo import MongoClient
 
 # proteomic_file = '/home/leandro/Data/metagenomas/MG_34_Emma/hit_protein/Canga_hit_proteins.fasta'
-# type_seq = 'contig'
-# date = '08.03.2017'
-# sample = 'MG_34'
-
-time_init = datetime.datetime.now()
-time_init_2 = datetime.datetime.now()
-print_time = False
 
 args = sys.argv
 
@@ -48,8 +43,6 @@ if '--help' in args:
 
     sys.exit(
         'The fields: sample_name, type_sequence and project are required, followed by other metadata that make up the sample.')
-
-
 else:
     if '-i' in args:
         proteomic_file = args[args.index('-i') + 1]
@@ -74,9 +67,15 @@ else:
             client = MongoClient('localhost', 7755)
             db = client.local
             collection = db.sequences
+            grep = "grep -c '^>' "
+            command = grep + proteomic_file
+            count = subprocess.check_output(command, shell=True)
+            print '\nLoading. . .\n'
+            widgets = ['Update: ', Percentage(), ' ', Bar(marker=RotatingMarker()), ' ', ETA(), ' ',
+                       FileTransferSpeed()]
 
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
-
+            pbar = ProgressBar(widgets=widgets, maxval=count * 10).start()
             data = {}
 
             for i in range(0, len(metadata_df.index)):
@@ -108,13 +107,8 @@ else:
                                 }
                         ObjectId = collection.insert(item)
 
-                    if i % 1000 == 0 and print_time:
-                        time_end = datetime.datetime.now()
-                        time = time_end - time_init_2
-                        print str(i) + ' ' + read_id + "  time: " + str(time)
-                        time_init_2 = time_end
-                    #"""
-                    # print read_id
+                    pbar.update(10 * i + 1)
+                pbar.finish()
                 i += 1
         else:
             print '\nMetadata.csv file not found.'
@@ -125,8 +119,3 @@ else:
         )
 
     print "\n\nThe data was successfully stored."
-
-if print_time:
-    time_end = datetime.datetime.now()
-    time = time_end - time_init
-    print "total time: " + str(time)

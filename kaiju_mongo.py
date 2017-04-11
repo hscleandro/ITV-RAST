@@ -4,18 +4,16 @@
 import pandas as pd
 import sys
 import os
-import datetime
 import insert_metadata as metadata
+from progressbar.progressbar import *
 
 
 from pymongo import MongoClient
 
 # PATH_kaiju = '/home/leandro/Data/metagenomas/MG_34_Emma/kaiju/MG_34_filtered.kaiju3.names_taxon.out'
 
-time_init = datetime.datetime.now()
-time_init_2 = datetime.datetime.now()
 args = sys.argv
-print_time = False
+
 
 if '--help' in args:
     os.system('clear')
@@ -74,9 +72,14 @@ else:
                        'read_id',
                        'taxon_id',
                        'taxon_name']
+            print '\nLoading. . .\n'
+            widgets = ['Update: ', Percentage(), ' ', Bar(marker=RotatingMarker()), ' ', ETA(), ' ',
+                       FileTransferSpeed()]
 
             kaiju_df = pd.read_csv(PATH_kaiju, sep="\t", names=columns)
+            print str(len(kaiju_df.index)) + ' instances to be inserted in the mongo database.\n\n'
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
+            pbar = ProgressBar(widgets=widgets, maxval=len(kaiju_df.index) * 1000).start()
 
             data = {}
 
@@ -86,6 +89,7 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
+            project = data.get('project')
             update = metadata.mongo_insert(PATH_metadata)
 
             # i = 0
@@ -112,6 +116,7 @@ else:
                                                     }, upsert=False)
                 if not update.get('updatedExisting'):
                     item = {'id_sample': sample,
+                            'project': project,
                             'id_seq': read_id,
                             'id_taxon': str(id_taxon),
                             'sequence': str(sequence),
@@ -125,11 +130,8 @@ else:
                             }
                     ObjectId = collection.insert(item)
 
-                if i % 1000 == 0 and print_time:
-                    time_end = datetime.datetime.now()
-                    time = time_end - time_init_2
-                    print str(i) + ' ' + read_id + "\t  time: " + str(time)
-                    time_init_2 = time_end
+                pbar.update(1000 * i + 1)
+            pbar.finish()
         else:
             print '\nMetadata.csv file not found.'
             sys.exit('Use -m to set the metadata adress file or write python kaiju_mongo.py --help, for details.')
@@ -138,7 +140,4 @@ else:
             "\n\nErro: Parameter -i required for script execution. \n\nUse: python kaiju_mongo.py --help for details.\n"
         )
 
-if print_time:
-    time_end = datetime.datetime.now()
-    time = time_end - time_init
-    print "total time: \t" + str(time)
+    print "\n\nThe data was successfully stored."

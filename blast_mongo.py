@@ -7,15 +7,13 @@ import os
 import datetime
 import parser_blast as parser
 import insert_metadata as metadata
+from progressbar.progressbar import *
 
 from pymongo import MongoClient
 
-time_init = datetime.datetime.now()
-time_init_2 = datetime.datetime.now()
 args = sys.argv
-print_time = False
 
-# PATH_blast = '/home/leandro/Python/metagenomics-database/input/MG_34_EMMA_FASTA_CDS_annotated.fasta.out'
+# PATH_blast = '/home/leandro/Python/metagenomics-database/input/blast.out'
 
 if '--help' in args:
     os.system('clear')
@@ -67,10 +65,16 @@ else:
             db = client.local
             collection = db.sequences
 
+            print '\nLoading. . .\n'
+            widgets = ['Update: ', Percentage(), ' ', Bar(marker=RotatingMarker()), ' ', ETA(), ' ',
+                       FileTransferSpeed()]
+
             matrix = parser.parser_blast(PATH_blast)
             blast_df = pd.DataFrame(matrix)
+            print str(len(blast_df.index)) + ' instances to be inserted in the mongo database.\n\n'
 
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
+            pbar = ProgressBar(widgets=widgets, maxval=len(blast_df.index) * 1000).start()
 
             data = {}
 
@@ -111,13 +115,8 @@ else:
                             })
 
                     ObjectId = collection.insert(item)
-
-
-                if i % 1000 == 0 and print_time:
-                    time_end = datetime.datetime.now()
-                    time = time_end - time_init_2
-                    print str(i) + ' ' + read_id + "  time: " + str(time)
-                    time_init_2 = time_end
+                pbar.update(1000 * i + 1)
+            pbar.finish()
         else:
             print '\nMetadata.csv file not found.'
             sys.exit('Use -m to set the metadata adress file or write python blast_mongo.py --help, for details.')
@@ -126,8 +125,3 @@ else:
             "\n\nErro: Parameter -i required for script execution. \n\nUse: python blast_mongo.py --help for details.\n")
 
     print "\n\nThe data was successfully stored."
-
-if print_time:
-    time_end = datetime.datetime.now()
-    time = time_end - time_init
-    print "time: " + str(time)
