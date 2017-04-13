@@ -118,10 +118,11 @@ $ python blast_mongo.py -i blast_output.out
 After installation, run the kaiju tool with the following parameters:
 ```
 $ kaiju -z 4 -t ~/nodes.dmp -f ~/blast_nr/kaiju_db_nr.fmi -a greedy -e 5 -m 12 -s 70 -i input.fasta -o kaiju_output.out
+$ addTaxonNames -t ~/blast_nr/nodes.dmp -n ~/blast_nr/names.dmp -i kaiju_output.out -r superkingdom,phylum,class,order,family,genus,species -o kaiju_names_output.out
 ```
 The results will be entered into the bank from the script:
 ```
-$ python kaiju_mongo.py -i kaiju_output.out
+$ python kaiju_mongo.py -i kaiju_names_output.out
 ```
 ### 5- Proteomic hit
 Proteomic analysis identifies protein sequences from a reference genome/metagenome. To enter the analysis results in the database you must execute the script proteomic-hit_mongo.py passing as reference the file fasta generated in the analysis.
