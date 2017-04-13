@@ -34,9 +34,9 @@ The database supports five different types of analysis. Below the table that con
 Index | Name Identifier | Analysis | Example
 ------------ | ------------- | ------------ | -------------
 0 | id_sample | Metadata | sample_01
-1 | id_seq | Metadata | contig72585_1_431_+
+1 | id_seq | Key | contig72585_1_431_+
 2 | project | Metadata | project_amazon
-3 | sequence | Interpro | contig	
+3 | sequence | Metadata | contig	
 4 | start_location | Interpro | 12
 5 | stop_location | Interpro | 125
 6 | signature_accession | Interpro | PF09103
