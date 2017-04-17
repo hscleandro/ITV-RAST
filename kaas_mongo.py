@@ -9,7 +9,8 @@ import insert_metadata as metadata
 from pymongo import MongoClient
 from progressbar.progressbar import *
 
-# PATH_kaas = '/home/leandro/Data/metagenomas/MG_34_Emma/kaas/MG_34_Emma_ko_aa.txt'
+# PATH_kaas = '/home/leandro/Data/metagenomas/Lagoas/amendoim/posdata/AM1/AM1.kaas'
+# PATH_metadata = '/home/leandro/Data/metagenomas/Lagoas/amendoim/posdata/AM1/metadata.csv'
 
 args = sys.argv
 
@@ -82,11 +83,11 @@ else:
 
             sample = data.get('sample_name')
             project = data.get('project')
-            update = metadata.mongo_insert(PATH_metadata)
+            update = metadata.mongo_insert(PATH_metadata, "kaas")
 
             # i = 2
             for i in range(0, len(kaas_df.index)):
-                sequence_split = str.split(kaas_df.iloc[i]['read_id'], "_")
+                #sequence_split = str.split(kaas_df.iloc[i]['read_id'], "_")
                 read_id = kaas_df.iloc[i]['read_id']
                 ko = kaas_df.iloc[i]['ko']
 

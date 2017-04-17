@@ -3,7 +3,9 @@
 import pandas as pd
 from pymongo import MongoClient
 
-def mongo_insert(PATH_metadata):
+# PATH_metadata = '/home/leandro/Data/metagenomas/Lagoas/amendoim/posdata/AM1/metadata.csv'
+
+def mongo_insert(PATH_metadata, tool):
     up = True
     metadata_df = pd.read_csv(PATH_metadata, sep=",")
 
@@ -18,7 +20,7 @@ def mongo_insert(PATH_metadata):
     db = client.local
     collection = db.samples
     id_sample = data.get('sample_name')
-    # print id_sample
+    # tool = "kaiju"
     # collection.find({'sample_name': id_sample}).count() > 0
 
     update = collection.update({'sample_name': id_sample},
@@ -26,7 +28,11 @@ def mongo_insert(PATH_metadata):
                                 }, upsert=False)
 
     if not update.get('updatedExisting'):
-        collection.insert(data)
+        objectid = collection.insert(data)
         up = False
+
+    collection.update({'sample_name': id_sample},
+                      {"$addToSet": {"tool": tool}
+                       }, upsert=False)
 
     return up

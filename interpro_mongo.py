@@ -90,7 +90,7 @@ else:
 
             sample = data.get('sample_name')
             project = data.get('project')
-            update = metadata.mongo_insert(PATH_metadata)
+            update = metadata.mongo_insert(PATH_metadata, "interpro")
 
 
             # i = 10

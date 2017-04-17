@@ -13,7 +13,8 @@ from pymongo import MongoClient
 
 args = sys.argv
 
-# PATH_blast = '/home/leandro/Python/metagenomics-database/input/blast.out'
+# PATH_blast = '/home/leandro/Data/metagenomas/MG_34_Emma/blast/MG_34_FASTA_CDS_EMG_annotated.fasta.out'
+# PATH_metadata = '/home/leandro/Data/metagenomas/MG_34_Emma/blast/metadata.csv'
 
 if '--help' in args:
     os.system('clear')
@@ -70,7 +71,8 @@ else:
                        FileTransferSpeed()]
 
             matrix = parser.parser_blast(PATH_blast)
-            blast_df = pd.DataFrame(matrix)
+            collums =["Query", "Sequence", "Score", "eValue"]
+            blast_df = pd.DataFrame(matrix, columns=collums)
             print str(len(blast_df.index)) + ' instances to be inserted in the mongo database.\n\n'
 
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
@@ -84,10 +86,10 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
-            update = metadata.mongo_insert(PATH_metadata)
+            update = metadata.mongo_insert(PATH_metadata, "blast")
 
             # i = 10
-            for i in range(0, len(blast_df.index)):
+            for i in range(1, len(blast_df.index)):
                 read_id = blast_df.iloc[i]['Query']
                 wide_sequence = blast_df.iloc[i]['Sequence']
                 temp = str.split(wide_sequence, "|")

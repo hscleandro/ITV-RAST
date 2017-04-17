@@ -90,7 +90,7 @@ else:
 
             sample = data.get('sample_name')
             project = data.get('project')
-            update = metadata.mongo_insert(PATH_metadata)
+            update = metadata.mongo_insert(PATH_metadata, "kaiju")
 
             # i = 0
             for i in range(0, len(kaiju_df.index)):

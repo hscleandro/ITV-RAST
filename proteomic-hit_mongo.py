@@ -13,7 +13,8 @@ import subprocess
 
 from pymongo import MongoClient
 
-# proteomic_file = '/home/leandro/Data/metagenomas/MG_34_Emma/hit_protein/Canga_hit_proteins.fasta'
+# proteomic_file = '/home/leandro/Data/metagenomas/MG_34_Emma/hit_protein/Canga_hit_proteins_mgrast.fasta'
+# PATH_metadata = '/home/leandro/Data/metagenomas/MG_34_Emma/hit_protein/metadata.csv'
 
 args = sys.argv
 
@@ -70,12 +71,13 @@ else:
             grep = "grep -c '^>' "
             command = grep + proteomic_file
             count = subprocess.check_output(command, shell=True)
+            count = count[:-1]
             print '\nLoading. . .\n'
             widgets = ['Update: ', Percentage(), ' ', Bar(marker=RotatingMarker()), ' ', ETA(), ' ',
                        FileTransferSpeed()]
 
             metadata_df = pd.read_csv(PATH_metadata, sep=",")
-            pbar = ProgressBar(widgets=widgets, maxval=count * 10).start()
+            pbar = ProgressBar(widgets=widgets, maxval=int(count) * 10).start()
             data = {}
 
             for i in range(0, len(metadata_df.index)):
@@ -84,30 +86,29 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
-            update = metadata.mongo_insert(PATH_metadata)
+            update = metadata.mongo_insert(PATH_metadata, "proteomic")
 
             i = 1
             for line in open(proteomic_file, 'r'):
                 if i % 2 == 1:
-                    # line = ">contig00001_32677_33900_+"
+                    # line = ">contig00003_10126_11573_-"
                     read_id = line[1:]
                     read_id = re.sub("\n", "", read_id)
-                    sequence = str.split(read_id, "_")[0]
+                    #sequence = str.split(read_id, "_")[0]
                     #"""
                     update = collection.update({'id_seq': read_id},
                                                {'$set': {'proteomics': "true"
                                                           },
                                                 }, upsert=False)
-                    print read_id + "\t" + str(update.get('updatedExisting'))
+                    #print read_id + "\t" + str(update.get('updatedExisting'))
                     if not update.get('updatedExisting'):
                         item = {'id_sample': sample,
                                 'id_seq': read_id,
-                                'sequence': sequence,
                                 'proteomics': "true"
                                 }
                         ObjectId = collection.insert(item)
 
-                    pbar.update(10 * i + 1)
+                    pbar.update(i + 1)
                 pbar.finish()
                 i += 1
         else:
