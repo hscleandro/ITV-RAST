@@ -20,8 +20,8 @@ Docker platform with mongodb is required. To install the mongodb image in docker
 ## Create mongo database
 * docker run --name mongoDB-Metagenomics -v /docker/mongoDB-Metagenomics/datadir:/data/db -p 7755:27017 -d mongo --auth
 * docker start mongoDB-Metagenomics
-* docker exec -it mongoDB-Metagenomics mongo admin
-* db.sequences.ensureIndex({id_seq: 1})
+* python index_all.py
+
 
 # Data Dictionary
 The database supports five different types of analysis. Below the table that contains the name of the key identifier in the database, and the type of tool used in the analysis.
