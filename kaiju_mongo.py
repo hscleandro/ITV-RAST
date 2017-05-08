@@ -10,7 +10,8 @@ from progressbar.progressbar import *
 
 from pymongo import MongoClient
 
-# PATH_kaiju = '/home/leandro/Data/metagenomas/MG_34_Emma/kaiju/MG_34_filtered.kaiju3.names_taxon.out'
+# PATH_kaiju = '/home/leandro/Data/metagenomas/MG_34_Emma/kaiju/contigs/MG_34_kaiju_names_taxon_emg.out'
+# PATH_metadata = '/home/leandro/Data/metagenomas/MG_34_Emma/kaiju/contigs/metadata.csv'
 
 args = sys.argv
 
@@ -95,38 +96,38 @@ else:
             # i = 0
             for i in range(0, len(kaiju_df.index)):
                 read_id = kaiju_df.iloc[i]['read_id']
-                sequence = str.split(read_id, "_")[0]
+                # sequence = str.split(read_id, "_")[0]
                 id_taxon = kaiju_df.iloc[i]['taxon_id']
                 name_taxon = kaiju_df.iloc[i]['taxon_name']
                 if str(type(name_taxon)) == "<type 'str'>":
                     taxons_hierarchy = str.split(name_taxon, ';')[0:7]
                 else:
-                    taxons_hierarchy = ['NA', 'NA', 'NA', 'NA', 'NA', 'NA']
+                    taxons_hierarchy = ['NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA']
 
                 update = collection.update({'id_seq': read_id},
-                                                   {'$set': {'id_taxon': str(id_taxon),
-                                                             'kingdom': str(taxons_hierarchy[0]),
-                                                             'phylum': str(taxons_hierarchy[1]),
-                                                             'class': str(taxons_hierarchy[2]),
-                                                             'order': str(taxons_hierarchy[3]),
-                                                             'family': str(taxons_hierarchy[4]),
-                                                             'genre': str(taxons_hierarchy[5]),
-                                                             'species': str(taxons_hierarchy[5])
+                                                   {'$set': {'id_taxon': str(id_taxon).strip(),
+                                                             'kingdom': str(taxons_hierarchy[0]).strip(),
+                                                             'phylum': str(taxons_hierarchy[1]).strip(),
+                                                             'class': str(taxons_hierarchy[2]).strip(),
+                                                             'order': str(taxons_hierarchy[3]).strip(),
+                                                             'family': str(taxons_hierarchy[4]).strip(),
+                                                             'genre': str(taxons_hierarchy[5]).strip(),
+                                                             'species': str(taxons_hierarchy[6]).strip()
                                                              },
                                                     }, upsert=False)
                 if not update.get('updatedExisting'):
                     item = {'id_sample': sample,
                             'project': project,
                             'id_seq': read_id,
-                            'id_taxon': str(id_taxon),
-                            'sequence': str(sequence),
-                            'kingdom': str(taxons_hierarchy[0]),
-                            'phylum': str(taxons_hierarchy[1]),
-                            'class': str(taxons_hierarchy[2]),
-                            'order': str(taxons_hierarchy[3]),
-                            'family': str(taxons_hierarchy[4]),
-                            'genre': str(taxons_hierarchy[5]),
-                            'species': str(taxons_hierarchy[5])
+                            'id_taxon': str(id_taxon).strip(),
+                            #'sequence': str(sequence),
+                            'kingdom': str(taxons_hierarchy[0]).strip(),
+                            'phylum': str(taxons_hierarchy[1]).strip(),
+                            'class': str(taxons_hierarchy[2]).strip(),
+                            'order': str(taxons_hierarchy[3]).strip(),
+                            'family': str(taxons_hierarchy[4]).strip(),
+                            'genre': str(taxons_hierarchy[5]).strip(),
+                            'species': str(taxons_hierarchy[6]).strip()
                             }
                     ObjectId = collection.insert(item)
 

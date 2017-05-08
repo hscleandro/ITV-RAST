@@ -5,6 +5,7 @@ client = MongoClient('localhost', 7755)
 db = client.local
 collection = db.sequences
 collection_samples = db.samples
+collection_funn = db.funn
 
 atributes = ["id_sample", "id_seq", "project", "sequence",
              #"orfs_inf",
@@ -21,3 +22,8 @@ atributes_sample = ["sample_name", "sequence", "date", "project", "latitude", "l
 
 for id_sample in atributes_sample:
     collection_samples.ensure_index([(id_sample, mongo.ASCENDING)])
+
+atributes_funn = ["sample_name", "sequence", "date", "project", "kegg_Pathways", "kegg_ko"]
+
+for id_funn in atributes_funn:
+    collection_funn.ensure_index([(id_funn, mongo.ASCENDING)])

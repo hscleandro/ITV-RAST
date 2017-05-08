@@ -5,6 +5,7 @@ import pandas as pd
 import sys
 import os
 import insert_metadata as metadata
+import re
 
 from pymongo import MongoClient
 from progressbar.progressbar import *
@@ -92,15 +93,15 @@ else:
                 ko = kaas_df.iloc[i]['ko']
 
                 update = collection.update({'id_seq': read_id},
-                                           {'$set': {'kegg_ko': str(ko),
+                                           {'$set': {'kegg_ko': re.sub(" ", "", str(ko))
                                                      },
                                            }, upsert=False)
 
                 if not update.get('updatedExisting'):
-                    item = {'id_sample': sample,
-                            'project': project,
+                    item = {'id_sample': sample.upper(),
+                            'project': project.upper(),
                             'id_seq': read_id,
-                            'kegg_ko': str(ko)
+                            'kegg_ko': re.sub(" ", "", str(ko))
                             }
                     ObjectId = collection.insert(item)
 

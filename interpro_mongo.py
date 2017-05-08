@@ -96,10 +96,10 @@ else:
             # i = 10
             for i in range(0, len(emg_df.index)):
                 read_id = emg_df.iloc[i]['Protein Accession']
-                sequence = str.split(emg_df.iloc[i]['Protein Accession'], "_")[0]
-                start_frame = str.split(emg_df.iloc[i]['Protein Accession'], "_")[1]
-                stop_frame = str.split(emg_df.iloc[i]['Protein Accession'], "_")[2]
-                sense_frame = str.split(emg_df.iloc[i]['Protein Accession'], "_")[3]
+                #sequence = str.split(emg_df.iloc[i]['Protein Accession'], "_")[0]
+                #start_frame = str.split(emg_df.iloc[i]['Protein Accession'], "_")[1]
+                #stop_frame = str.split(emg_df.iloc[i]['Protein Accession'], "_")[2]
+                #sense_frame = str.split(emg_df.iloc[i]['Protein Accession'], "_")[3]
                 start_location = emg_df.iloc[i]['Start location']
                 stop_location = emg_df.iloc[i]['Stop location']
                 signature_accession = emg_df.iloc[i]['Signature Accession']
@@ -152,10 +152,9 @@ else:
                                            }, upsert=False)
 
                 if not update.get('updatedExisting'):
-                    item = ({'id_sample': sample,
+                    item = ({'id_sample': sample.upper(),
                              'id_seq': read_id,
-                             'project': project,
-                             'sequence': str(sequence),
+                             'project': project.upper(),
                              'orfs_inf':
                                      [{
                                        "start_location": str(start_location),

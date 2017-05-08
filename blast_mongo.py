@@ -86,6 +86,7 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
+            project = data.get('project')
             update = metadata.mongo_insert(PATH_metadata, "blast")
 
             # i = 10
@@ -107,8 +108,9 @@ else:
                                             }, upsert=False)
 
                 if not update.get('updatedExisting'):
-                    item = ({'id_sample': sample,
+                    item = ({'id_sample': sample.upper(),
                              'id_seq': read_id,
+                             'project': project.upper(),
                              'sequence': str(sequence),
                              'blast_id': id_Sequence,
                              'blast_hit': str(sequence),

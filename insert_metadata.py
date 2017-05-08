@@ -14,6 +14,10 @@ def mongo_insert(PATH_metadata, tool):
     for i in range(0, len(metadata_df.index)):
         key = metadata_df.iloc[i]['index']
         kwargs = metadata_df.iloc[i]['Requirement']
+        if type(kwargs) is str:
+            if kwargs.isalpha():
+                kwargs = kwargs.upper()
+
         data[key] = kwargs
 
     client = MongoClient('localhost', 7755)

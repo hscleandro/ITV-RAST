@@ -86,6 +86,7 @@ else:
                 data[key] = kwargs
 
             sample = data.get('sample_name')
+            project = data.get('project')
             update = metadata.mongo_insert(PATH_metadata, "proteomic")
 
             i = 1
@@ -102,7 +103,8 @@ else:
                                                 }, upsert=False)
                     #print read_id + "\t" + str(update.get('updatedExisting'))
                     if not update.get('updatedExisting'):
-                        item = {'id_sample': sample,
+                        item = {'id_sample': sample.upper(),
+                                'project': project.upper(),
                                 'id_seq': read_id,
                                 'proteomics': "true"
                                 }
