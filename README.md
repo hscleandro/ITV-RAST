@@ -94,7 +94,7 @@ $ interproscan.sh -dp --appl PfamA,TIGRFAM,PRINTS,PrositePatterns,Gene3d --goter
 ```
 The results are entered into the database from the script interpro_mongo.py
 ```
-$ python interpro_mongo.py -i interpro_output.tsv
+$ python interpro_mongo.py -i interpro_output.tsv -s SAMPLE -p PROJECT
 ```
 
 ### 2- Kaas
@@ -102,7 +102,7 @@ $ python interpro_mongo.py -i interpro_output.tsv
 
 Submit the sequences and download the results of the identified ortholog groups. The results are entered into the database from the script kaas_mongo.py
 ```
-$ python kaas_mongo.py -i kaas_output.kaas
+$ python kaas_mongo.py -i kaas_output.kaas -s SAMPLE -p PROJECT
 ```
 
 ### 3- Blast
@@ -110,7 +110,7 @@ $ python kaas_mongo.py -i kaas_output.kaas
 
 Run the blast tool and put the results are entered into the database from the script blast_mongo.py
 ```
-$ python blast_mongo.py -i blast_output.out
+$ python blast_mongo.py -i blast_output.out -s SAMPLE -p PROJECT
 ```
 ### 4- Kaiju
 [Kaiju](https://github.com/bioinformatics-centre/kaiju) is a program for the taxonomic classification of high-throughput sequencing reads. 
@@ -122,12 +122,12 @@ $ addTaxonNames -t ~/blast_nr/nodes.dmp -n ~/blast_nr/names.dmp -i kaiju_output.
 ```
 The results will be entered into the bank from the script:
 ```
-$ python kaiju_mongo.py -i kaiju_names_output.out
+$ python kaiju_mongo.py -i kaiju_names_output.out -s SAMPLE -p PROJECT
 ```
 ### 5- Proteomic hit
 Proteomic analysis identifies protein sequences from a reference genome/metagenome. To enter the analysis results in the database you must execute the script proteomic-hit_mongo.py passing as reference the file fasta generated in the analysis.
 ```
-$ python kaiju_mongo.py -i proteomic-hit.fasta
+$ python proteomic-hit_mongo.py -i proteomic-hit.fasta -s SAMPLE -p PROJECT
 ```
 
 ## Data download URL
