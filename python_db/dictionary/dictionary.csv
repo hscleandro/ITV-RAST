@@ -1,0 +1,33 @@
+Index,Name Identifier,Analysis,Example
+0,id_sample,Metadata,sample_01
+1,id_seq,Key,contig72585_1_431_+
+2,project,Metadata,project_amazon
+3,sequence,Metadata,contig
+4,orfs_inf,Interpro,
+5,start_location,Interpro,12
+6,stop_location,Interpro,125
+7,signature_accession,Interpro,PF09103
+8,signature_description,Interpro,BRCA2 repeat profile
+9,protein_analysis,Interpro,Pfam
+10,score,Interpro,2.3E-18
+11,interpro_accession,Interprol,IPR002093
+12,interpro_description,Interpro,BRCA2 repeat
+13,protem_seq,Interpro,
+14,go_annotations,Interpro,GO:0005515
+15,kegg_Pathways,Interpro,binario
+16,reactome_pathways,Interpro,R-HSA-111457
+17,metacyc_pathways,Interpro,00230+2.7.7.7
+18,kegg_ko,KAAS,K06160
+19,id_taxon,Kaiju,1348852
+20,kingdom,Kaiju,Bacteria
+21,phylum,Kaiju,Actinobacteria
+22,class,Kaiju,Actinobacteria
+23,order,Kaiju,Propionibacteriales
+24,family,Kaiju,Nocardioidaceae
+25,genre,Kaiju,Mumia
+26,species,Kaiju,Mumia flava
+27,blast_id,Blast,gb[CP014028.1]
+28,blast_hit,Blast,"Achromobacter xylosoxidans strain FDAARGOS_150, c..."
+29,blast_score,Blast,100
+30,blast_evalue,Blast,8E-18
+31,proteomics,Proteomic analysis,True

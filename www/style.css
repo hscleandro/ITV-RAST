@@ -1,0 +1,506 @@
+
+body {
+  background-color: #f8f8f8;
+}
+
+#div_uploadDataFiles, #div_uploadDataFiles2{
+  float:left;
+  clear:left;
+}
+
+#upload_msg{
+  color: #556B2F;
+  line-height: 53px;
+  text-align: center;
+  width:300px;
+  height: 53px;
+  position:relative;
+  top:53px;
+  left:30px;
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eee;
+}
+
+#upload_msg2{
+  color: #556B2F;
+  line-height: 53px;
+  text-align: center;
+  width:300px;
+  height: 53px;
+  position:relative;
+  top:53px;
+  left:30px;
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eee;
+}
+
+
+#welcome_gif{
+  width: 300px;
+  height: 150px;
+}
+
+#logo-begin {
+  left: 1%;
+  top: 0;
+  width: 30%;
+  height: 18%;
+  
+}
+
+#logo-title {
+  position: relative;
+  top: 0;
+  margin-top: -20px;
+  width: 130px;;
+  height: 58px;
+  
+}
+
+#loading-content {
+  white-space: pre;
+  position: fixed;
+  background: #FFFFFF;/*color of loading screen */
+  z-index: 100000;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding-top: 50px;
+  bottom: 0;
+  font-size: 50px;
+  text-align: center;
+  color: #000000;/*color of loading before the app starts */
+}
+
+#plateDirty {
+  margin-top: 12px;
+}
+
+body > .container {
+  width: 99%;
+  background-color: #ffffff;/*color of main container*/
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: -1px;
+  margin-bottom: 30px;
+  border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+}
+
+.popover {
+  max-width: 600px;
+}
+
+.popover-title {
+  font-weight: bold;
+}
+
+.popover-link {
+  color: #444;/* color of question icone */
+  font-size: 16px;
+}
+
+.popover-link > i.fa {
+  vertical-align: top;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+  border-top: 2px solid orange;
+  border-bottom: 0;
+  font-weight: bold;
+}
+
+.nav-tabs>li {
+  margin-left: 7px;
+}
+
+.nav-tabs>li>a {
+  background-color: #f8f8f8;/* color of internal tabs*/
+  border: 1px solid #dddddd;/* color of border in internal tabs */
+}
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+  background-color: #dddddd; /*background color when put mouse above */
+}
+
+/* Navbar */
+
+.navbar-brand {
+  padding: 17px 17px;
+  height: 56px;
+  margin-top: 2px;
+}
+
+.navbar-inverse {
+  background: #007f7b;/*backgroud color of the main menu */
+  margin-bottom: 0;
+  /* box-shadow: 0 0 10px #222; */
+}
+.navbar-inverse .navbar-nav>li>a {
+  color: #FFFFF0;/* color of letters in main tab */
+  font-family: "Open Sans", "Arial";
+}
+.navbar .fa-fw {
+  margin-right: -1px;
+}
+.navbar {
+  font-size: 16px;
+}
+.navbar-nav>li>a {
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  border-top: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>.active>a:focus {
+  border-top-color: #201a16; /* color of border in main tabs*/
+  background: #fff;/* color of background when this tab was choosen */
+  color: #201a16; /* color or letter when this tab was choosen */
+  cursor: default;
+  transition: background 0.3s;
+}
+
+/* Animated underline for the main nav */
+
+.navbar .navbar-nav>li>a:after {
+	content: '';
+	display: block;
+	margin: auto;
+	margin-top: 1px;
+	height: 2px;
+	width: 0px;
+	background: transparent;
+	transition: width .3s ease, background-color .3s ease;
+}
+.navbar .navbar-nav>li>a:hover:after {
+	width: 100%;
+	background: #fff;/* color of line to show up when the mouse is above the tab */
+}
+.navbar .navbar-nav>.active>a:hover:after {
+	width: 0px;
+	background: transparent;
+}
+
+#headerDatasetDesc {
+  margin-bottom: 20px;
+  color: #000000; /* main text in tab dataset */
+  text-align: center;
+}
+
+#datasetDescSelect,
+#datasetDescName {
+  font-size: 3em;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+#datasetDescSummary {
+  font-size: 1.3em;
+  margin-bottom: 5px;
+  vertical-align: middle;
+}
+
+#saveBtn {
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.btn-loading-container {
+  margin-left: 10px;
+  font-size: 1.2em;
+}
+
+.btn-done-indicator {
+  color: green;
+}
+
+#errorDiv {
+  margin-top: 10px;
+  color: red;
+  font-size: 1.2em;
+}
+
+label {
+  font-size: 1.2em;
+}
+
+button.btn-primary:not(.lg-btn) {
+  font-size: 1.2em;
+}
+
+button.btn-primary.lg-btn {
+  padding: 10px 20px;
+}
+
+.next-msg {
+  margin-top: 20px;
+  color: #228B22;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#uploadFilesBtn{
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  margin-left: 49px;
+}
+
+#kaijuDataFile, #kaasResultsFile, #proteomicResultsFile, #interProResultsFile, #blastResultsFile, #metadataResultsFile {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+#resetUploadFiles{
+  padding: 8px;
+  width: 120px;
+}
+
+
+
+#basicSettingsTabContent .shiny-input-container {
+  width: 400px;
+}
+
+#showPlateTypeExample {
+  position: relative;
+  top: -15px;
+}
+
+#settingsSubset {
+  width: 650px;
+}
+
+#subsetPlotDesc {
+  font-size: 1.2em;
+}
+
+#subsetNotReversibleNote {
+  font-size: 1.2em;
+}
+
+#subsetNotReversibleNote .popover-link {
+  font-size: 14px;
+}
+
+#resetParamsBtn {
+  margin-left: 15px;
+}
+
+#advancedSettings .shiny-input-container {
+  margin-left: 20px;
+}
+
+#analyzeTabContent {
+  font-size: 1.5em;
+  color: #444;/*main text in analize tab */
+}
+
+#Submit_tax{
+  padding: 6px;
+  width: 120px;
+
+}
+
+#cluster{
+  margin-left: 29%;
+  font-size: 26px;
+
+}
+
+
+#refreshOverviewTable{
+  padding: 11px;
+  width: 120px;
+}
+
+#analyzeBtn {
+  font-size: 1em;
+  padding: 11px;
+  margin-left: 40px;
+}
+
+#addSample{
+  margin-left: 40px;
+  padding: 11px;
+
+}
+
+#RemoveSample{
+  padding: 11px;
+}
+
+
+#analyzeProgress {
+  margin-top: 15px;
+  color: #444444;
+  padding: 0;
+  font-size: inherit;
+  background: none;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+}
+
+#downloadMetaData {
+  display: inline-block;
+  padding: 11px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+#dropletsTable {
+  float: left;
+}
+
+#clustersMappingOuter {
+  text-align: center;
+  float: left;
+  margin-left: 50px;
+  margin-top: 25px;
+}
+
+#clustersMappingInner {
+  display: inline-block;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 10px 25px;
+  background-color: #fafafa;
+  font-size: 1.3em;
+  text-align: left;
+}
+
+#clustersTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #f8f8f8;
+}
+
+#clustersMapping {
+  text-transform: lowercase;
+}
+
+#dropletsTable .dataTable,
+#metaAggregate .dataTable,
+#metaTable .dataTables_scroll {
+  border: 1px solid #111;
+}
+
+#metaTable .dataTables_scrollBody {
+  border-bottom: 0;
+}
+
+#metaTable .dt-buttons {
+  float: right;
+}
+
+.dt-button-collection {
+  width: auto;
+}
+
+#aggregateDesc {
+  font-weight: bold;
+  margin-bottom: -30px;
+}
+
+#aggregateDesc .popover-link {
+  position: relative;
+  z-index: 1;
+}
+
+#metaAggregate {
+  margin-top: 35px;
+}
+
+#downloadPlot {
+  margin-left: 10px;
+}
+
+#plotOptionsSection {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#plotParamsTabs.nav-pills>li>a {
+  border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  -moz-border-radius: 3px 3px 0 0;
+  font-size: 1.2em;
+}
+
+#plotParamsTabs.nav-pills>li.active>a {
+  color: #222;
+  font-weight: bold;
+  background-color: #fcfcfc;
+  border: 1px solid #ccc;
+  border-bottom: 0;
+  border-top: 2px solid orange;
+}
+
+#plotParamsTabs.nav>li>a {
+  padding: 5px 15px;
+  border-top: 2px solid transparent;
+}
+
+#plotOptionsSection .tab-content {
+  padding: 0 20px;
+  background-color: #fcfcfc;
+  border: 1px solid #ccc;
+  margin-top: -1px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+#mainPlotContainer {
+  position: relative;
+}
+
+#inc{
+  margin-top: -10000px;
+}
+
+#plotSpinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: -33px;
+  z-index: 1;
+}
+
+#mainPlot {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+#mainPlot.recalculating {
+  z-index: 0;
+}
+
+.plotParamDropName {
+  text-align: right;
+  padding-top: 5px;
+}
+
+#plotParamsDropRow-failed .plotParamDropName {
+  margin-top: -10px;
+}

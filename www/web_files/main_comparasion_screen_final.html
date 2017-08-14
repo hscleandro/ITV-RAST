@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<script src="web_files/d3.v4.min.js"></script>
+<script src="web_files/viz.v1.1.0.min.js"></script>
+
+
+
+<title> Interative Overview Comparison </title>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+
+.primeira{
+  margin-left: 10%;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<style type="text/css">
+
+.main-container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+text{
+	font-size:12px;
+}
+
+.header{
+  bold: 12px;
+}
+
+.mainBars rect{
+  shape-rendering: auto;
+  fill-opacity: 0;
+  stroke-width: 0.5px;
+  stroke: rgb(0, 0, 0);
+  stroke-opacity: 0;
+}
+.subBars{
+	shape-rendering:crispEdges;
+}
+.edges{
+	stroke:none;
+	fill-opacity:0.5;
+}
+
+line{
+	stroke:grey;
+}
+
+
+</style>
+
+
+<h1><center>Interative Overview Comparison</center></h1>
+
+<!-- ############################################################################################################################################### -->
+
+<script>
+
+/*var data1=[
+['amostra1','Chloroflexi', 3,1]
+,['amostra2','Chloroflexi', 1,1]
+,['amostra2','Proteobacteria', 1,1]
+,['amostra3','Actinobacteria', 1,1]
+,['amostra3','Proteobacteria', 2,1]
+];*/
+
+var data1;
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                data1 = rawFile.responseText;
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
+
+readTextFile('web_files/export.json')
+
+//remove as aspas apenas do numeros
+var $out = data1.replace(/"(\d)"/g,"$1");
+
+//transfom string to variable 
+data1 = eval($out)
+
+
+var color1 = {amostra1:"#3366CC", amostra2:"#DC3912",  amostra3:"#FF9900", Chloroflexi:"#3367CC", Proteobacteria:"#DC3917",  Actinobacteria:"#FF9907"};
+var svg = d3.select("body").append("svg").attr("width", 1440).attr("height", 800).attr("class", "primeira");
+
+svg.append("text").attr("x",180).attr("y",40)
+	.attr("class","header").text("Taxonomic");
+	
+svg.append("text").attr("x",680).attr("y",40)
+	.attr("class","header").text("Funcional");
+	
+svg.append("text").attr("x",1180).attr("y",40)
+	.attr("class","header").text("Metadata");
+
+
+var g1 = svg.append("g").attr("transform","translate(130,90)");
+
+var bp1=viz.bP()
+		.data(data1)
+		.min(12)
+		.pad(1)
+		.height(600)
+		.width(150)
+		.barSize(35)
+		.fill(d=>color1[d.primary]);
+			
+g1.call(bp1);
+
+g1.append("text").attr("x",-50).attr("y",-10).style("text-anchor","middle").text("Samples");
+g1.append("text").attr("x", 200).attr("y",-10).style("text-anchor","middle").text("Taxons");
+
+g1.append("line").attr("x1",-100).attr("x2",0);
+g1.append("line").attr("x1",150).attr("x2",250);
+	
+g1.append("line").attr("y1",610).attr("y2",610).attr("x1",-100).attr("x2",0);
+g1.append("line").attr("y1",610).attr("y2",610).attr("x1",150).attr("x2",250);
+
+g1.selectAll(".mainBars")
+	.on("mouseover",mouseover)
+	.on("mouseout",mouseout)
+
+g1.selectAll(".mainBars").append("text").attr("class","label")
+	.attr("x",d=>(d.part=="primary"? -25: 25))
+	.attr("y",d=>+6)
+	.text(d=>d.key)
+	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+g1.selectAll(".mainBars").append("text").attr("class","perc")
+	.attr("x",d=>(d.part=="primary"? -100: 130))
+	.attr("y",d=>+6)
+	.text(function(d){ return d3.format("0.0%")(d.percent)})
+	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+//###########33
+
+var data2=[
+['amostra1','CO production', 1,1]
+,['amostra1','fotossintese', 1,1]
+,['amostra1','metano production', 2,1]
+,['amostra3','CO2 production', 2,1]
+];
+
+var color2 = {amostra1:"#3366CC", amostra2:"#DC3912",  amostra3:"#FF9900", Chloroflexi:"#3367CC", Proteobacteria:"#DC3917",  Actinobacteria:"#FF9907"};
+var g2 = svg.append("g").attr("transform","translate(630,90)");
+
+var bp2=viz.bP()
+		.data(data2)
+		.min(12)
+		.pad(1)
+		.height(600)
+		.width(150)
+		.barSize(35)
+		.fill(d=>color1[d.primary]);
+			
+g2.call(bp2);
+
+g2.append("text").attr("x",20).attr("y",-10).style("text-anchor","middle").text("Samples");
+g2.append("text").attr("x", 130).attr("y",-10).style("text-anchor","middle").text("Functions");
+
+g2.selectAll(".mainBars")
+	.on("mouseover",mouseover)
+	.on("mouseout",mouseout)
+
+g2.selectAll(".mainBars").append("text").attr("class","label")
+	.attr("x",d=>(d.part=="primary"? -25: 25))
+	.attr("y",d=>+6)
+	.text(d=>d.key)
+	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+g2.selectAll(".mainBars").append("text").attr("class","perc")
+	.attr("x",d=>(d.part=="primary"? -100: 130))
+	.attr("y",d=>+6)
+	.text(function(d){ return d3.format("0.0%")(d.percent)})
+	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+//###################
+
+var data3=[
+['amostra1','metano', 3,1]
+,['amostra2','nitrogenio', 1,1]
+,['amostra3','CO2', 5,1]
+,['amostra3','nitrato', 1,1]
+];
+
+var color3 = {amostra1:"#3366CC", amostra2:"#DC3912",  amostra3:"#FF9900", Chloroflexi:"#3367CC", Proteobacteria:"#DC3917",  Actinobacteria:"#FF9907"};
+var g3 = svg.append("g").attr("transform","translate(1130,90)");
+
+var bp3=viz.bP()
+		.data(data3)
+		.min(12)
+		.pad(1)
+		.height(600)
+		.width(150)
+		.barSize(35)
+		.fill(d=>color1[d.primary]);
+			
+g3.call(bp3);
+
+g3.append("text").attr("x",20).attr("y",-10).style("text-anchor","middle").text("Samples");
+g3.append("text").attr("x", 130).attr("y",-10).style("text-anchor","middle").text("Metadada");
+
+g3.selectAll(".mainBars").append("text").attr("class","label")
+	.attr("x",d=>(d.part=="primary"? -25: 25))
+	.attr("y",d=>+6)
+	.text(d=>d.key)
+	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+g3.selectAll(".mainBars").append("text").attr("class","perc")
+	.attr("x",d=>(d.part=="primary"? -100: 130))
+	.attr("y",d=>+6)
+	.text(function(d){ return d3.format("0.0%")(d.percent)})
+	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+//###############
+
+g1.selectAll(".mainBars")
+	.on("mouseover",mouseover)
+	.on("mouseout",mouseout);
+
+g2.selectAll(".mainBars")
+	.on("mouseover",mouseover)
+	.on("mouseout",mouseout);
+	
+g3.selectAll(".mainBars")
+	.on("mouseover",mouseover)
+	.on("mouseout",mouseout);
+
+function mouseover(d){
+	bp1.mouseover(d);
+	bp2.mouseover(d);
+	bp3.mouseover(d)
+}	
+
+function mouseout(d){
+	bp1.mouseout(d);
+	bp2.mouseout(d);
+	bp3.mouseout(d);
+}	
+
+d3.select(self.frameElement).style("height", "800px");
+
+
+
+</script>
+<!-- ############################################################################################################################################### -->
+
+
+
+
+
+</body>
+</html>

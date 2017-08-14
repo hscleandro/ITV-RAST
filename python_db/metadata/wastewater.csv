@@ -1,0 +1,72 @@
+"index","Requirement","Format","Term","Descrption"
+"sample_name","M","{text}",,
+"taxon_id","M","{integer}",,
+"scientific_name","M","{text}",,
+"host_subject_id","M","{text}",,
+"description","M","{text}",,
+"physical_specimen_location","M","{text}",,
+"physical_specimen_remaining","M","{boolean}",,
+"collection_timestamp","M","yyyy-mm-dd hh:mm",,
+"latitude","M","{decimal degrees}",,
+"longitude","M","{decimal degrees}",,
+"investigation_type","M","{term}","metagenome",
+"project_name","M","{text}",,
+"experimental_factor","X","{term, text}",,
+"geo_loc_name","M","GAZ:{term}",,
+"env_biome","M","ENVO:{term}",,
+"env_feature","M","ENVO:{term}",,
+"env_material","M","ENVO:{term}",,
+"env_package","M","{term}","soil",
+"alt","C","{float} m",,
+"depth","M","{float} m","depth","depth is defined as the vertical distance below local surface, e.g. for sediment or soil samples depth is measured from sediment or soil surface, respectivly. Depth can be reported as an interval for subsurface samples"
+"elev","M","{float} {unit}","alkalinity","alkalinity, the ability of a solution to neutralize acids to the equivalence point of carbonate or bicarbonate"
+"cur_land_use","X","[cities|farmstead|industrial areas|roads/railroads|rock|sand|gravel|mudflats|salt flats|badlands|permanent snow or ice|saline seeps|mines/quarries|oil waste areas|small grains|row crops|vegetable crops|horticultural plants (e.g. tulips)|marshlands (grass,sedges,rushes)|tundra (mosses,lichens)|rangeland|pastureland (grasslands used for livestock grazing)|hayland|meadows (grasses,alfalfa,fescue,bromegrass,timothy)|shrub land (e.g. mesquite,sage-brush,creosote bush,shrub oak,eucalyptus)|successional shrub land (tree saplings,hazels,sumacs,chokecherry,shrub dogwoods,blackberries)|shrub crops (blueberries,nursery ornamentals,filberts)|vine crops (grapes)|conifers (e.g. pine,spruce,fir,cypress)|hardwoods (e.g. oak,hickory,elm,aspen)|intermixed hardwood and conifers|tropical (e.g. mangrove,palms)|rainforest (evergreen forest receiving >406 cm annual rainfall)|swamp (permanent or semi-permanent water body dominated by woody plants)|crop trees (nuts,fruit,christmas trees,nursery trees)]","biochemical oxygen demand","a measure of the relative oxygen-depletion effect of a waste contaminant"
+"cur_vegetation","X","{text}","chemical administration","list of chemical compounds administered to the host or site where sampling occurred, and when (e.g. antibiotics, N fertilizer, air filter); can include multiple compounds. For Chemical Entities of Biological Interest ontology (CHEBI) (v 111), http://purl.bioontology.org/ontology/CHEBI"
+"cur_vegetation_meth","X","{PMID|DOI|URL}","chemical oxygen demand","a measure of the relative oxygen-depletion effect of a waste contaminant"
+"previous_land_use","X","{text};{timestamp}","efficiency percent","percentage of volatile solids removed from the anaerobic digestor"
+"previous_land_use_meth","X","{PMID|DOI|URL}","emulsions","amount or concentration of substances such as paints, adhesives, mayonnaise, hair colorants, emulsified oils, etc.; can include multiple emulsion types"
+"crop_rotation","X","{boolean};Rn/{timestamp}/{period}","gaseous substances","amount or concentration of substances such as hydrogen sulfide, carbon dioxide, methane, etc.; can include multiple substances"
+"agrochem_addition","X","{text};{float} {unit};{timestamp}","industrial effluent percent","percentage of industrial effluents received by wastewater treatment plant"
+"tillage","X","[drill|cutting disc|ridge till|strip tillage|zonal tillage|chisel|tined|mouldboard|disc plough]","inorganic particles","concentration of particles such as sand, grit, metal particles, ceramics, etc.; can include multiple particles"
+"fire","X","{timestamp}","miscellaneous parameter","any other measurement performed or parameter collected, that is not listed here"
+"flooding","X","{timestamp}","nitrate","concentration of nitrate"
+"extreme_event","X","{timestamp}","organic particles","concentration of particles such as faeces, hairs, food, vomit, paper fibers, plant material, humus, etc."
+"horizon","X","[O horizon|A horizon|E horizon|B horizon|C horizon|R layer|Permafrost]","organism count","total count of any organism per gram or volume of sample, should include name of organism followed by count; can include multiple organism counts"
+"horizon_meth","X","{PMID|DOI|URL}","oxygenation status of sample","oxygenation status of sample"
+"sieving","X","{{text}|{float} {unit}};{float} {unit}","perturbation","type of perturbation, e.g. chemical administration, physical disturbance, etc., coupled with time that perturbation occurred; can include multiple perturbation types"
+"water_content","X","{float} {unit}","pH","pH measurement"
+"water_content_soil_meth","X","{PMID|DOI|URL}","phosphate","concentration of phosphate"
+"samp_vol_we_dna_ext","X","{float} {unit}","pre-treatment","the process of pre-treatment removes materials that can be easily collected from the raw wastewater"
+"pool_dna_extracts","X","{boolean};{float} {unit}","primary treatment","the process to produce both a generally homogeneous liquid capable of being treated biologically and a sludge that can be separately treated or processed"
+"store_cond","X","{text};{period}","reactor type","anaerobic digesters can be designed and engineered to operate using a number of different process configurations, as batch or continuous, mesophilic, high solid or low solid, and single stage or multistage"
+"link_climate_info","X","{PMID|DOI|URL}","sample salinity","salinity of sample, i.e. measure of total salt concentration"
+"annual_season_temp","X","{float} {unit}","sample storage duration","duration for which sample was stored"
+"annual_season_precpt","X","{float} {unit}","sample storage location","location at which sample was stored, usually name of a specific freezer/room"
+"link_class_info","X","{PMID|DOI|URL}","sample storage temperature","temperature at which sample was stored, e.g. -80 degree Celsius"
+"fao_class","X","{term}","sample volume or weight for DNA extraction","volume (mL) or weight (g) of sample processed for DNA extraction"
+"local_class","X","{text}","secondary treatment","the process for substantially degrading the biological content of the sewage "
+"local_class_meth","X","{PMID|DOI|URL}","sewage type","type of wastewater treatment plant as municipial or industrial"
+"soil_type","X","{text}","sludge retention time","the time activated sludge remains in reactor"
+"soil_type_meth","X","{PMID|DOI|URL}","sodium","sodium concentration"
+"slope_gradient","X","{float} {unit}","soluble inorganic material","concentration of substances such as ammonia, road-salt, sea-salt, cyanide, hydrogen sulfide, thiocyanates, thiosulfates, etc."
+"slope_aspect","X","{float} {unit}","soluble organic material","concentration of substances such as urea, fruit sugars, soluble proteins, drugs, pharmaceuticals, etc."
+"profile_position","X","[summit|shoulder|backslope|footslope|toeslope]","suspended solids","concentration of substances including a wide variety of material, such as silt, decaying plant and animal matter, etc,; can include multiple substances"
+"drainage_class","X","[very poorly|poorly|somewhat poorly|moderately well|well|excessively drained]","temperature","temperature of the sample at time of sampling"
+"texture","X","{float} {unit}","tertiary treatment","the process providing a final treatment stage to raise the effluent quality before it is discharged to the receiving environment"
+"texture_meth","X","{PMID|DOI|URL}","total nitrogen","total nitrogen concentration of water samples, calculated by: total nitrogen = total dissolved nitrogen + particulate nitrogen. Can also be measured without filtering, reported as nitrogen"
+"ph","X","{float}","total phosphate","total amount or concentration of phosphate"
+"ph_meth","X","{PMID|DOI|URL}","wastewater type","the origin of wastewater such as human waste, rainfall, storm drains, etc."
+"tot_org_carb","X","{float} {unit}","depth","depth is defined as the vertical distance below local surface, e.g. for sediment or soil samples depth is measured from sediment or soil surface, respectivly. Depth can be reported as an interval for subsurface samples"
+"tot_org_c_meth","X","{PMID|DOI|URL}","alkalinity","alkalinity, the ability of a solution to neutralize acids to the equivalence point of carbonate or bicarbonate"
+"tot_nitro","X","{float} {unit}","biochemical oxygen demand","a measure of the relative oxygen-depletion effect of a waste contaminant"
+"tot_n_meth","X","{PMID|DOI|URL}","chemical administration","list of chemical compounds administered to the host or site where sampling occurred, and when (e.g. antibiotics, N fertilizer, air filter); can include multiple compounds. For Chemical Entities of Biological Interest ontology (CHEBI) (v 111), http://purl.bioontology.org/ontology/CHEBI"
+"microbial_biomass","X","{float} {unit}","chemical oxygen demand","a measure of the relative oxygen-depletion effect of a waste contaminant"
+"microbial_biomass_meth","X","{PMID|DOI|URL}","efficiency percent","percentage of volatile solids removed from the anaerobic digestor"
+"link_addit_analys","X","{PMID|DOI|URL}","emulsions","amount or concentration of substances such as paints, adhesives, mayonnaise, hair colorants, emulsified oils, etc.; can include multiple emulsion types"
+"extreme_salinity","X","{float} {unit}","gaseous substances","amount or concentration of substances such as hydrogen sulfide, carbon dioxide, methane, etc.; can include multiple substances"
+"salinity_meth","X","{PMID|DOI|URL}","industrial effluent percent","percentage of industrial effluents received by wastewater treatment plant"
+"heavy_metals","X","{text};{float} {unit}","inorganic particles","concentration of particles such as sand, grit, metal particles, ceramics, etc.; can include multiple particles"
+"heavy_metals_meth","X","{PMID|DOI|URL}","miscellaneous parameter","any other measurement performed or parameter collected, that is not listed here"
+"al_sat","X","{float} {unit}","nitrate","concentration of nitrate"
+"al_sat_meth","X","{PMID|DOI|URL}","organic particles","concentration of particles such as faeces, hairs, food, vomit, paper fibers, plant material, humus, etc."
+"misc_param","X","{text};{float} {unit}","organism count","total count of any organism per gram or volume of sample, should include name of organism followed by count; can include multiple organism counts"

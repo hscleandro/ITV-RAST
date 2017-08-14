@@ -1,0 +1,74 @@
+"index","Requirement","Format","Term","Description"
+"sample_name","M","{text}","Jones99.plant.associated.1",
+"taxon_id","M","{integer}",,
+"scientific_name","M","{text}",,
+"host_subject_id","M","{text}",,
+"description","M","{text}",,
+"physical_specimen_location","M","{text}",,
+"physical_specimen_remaining","M","{boolean}",,
+"collection_timestamp","M","yyyy-mm-dd hh:mm",,
+"latitude","M","{decimal degrees}",,
+"longitude","M","{decimal degrees}",,
+"investigation_type","M","{term}","metagenome",
+"project_name","M","{text}",,
+"experimental_factor","X","{term, text}",,
+"geo_loc_name","M","GAZ:{term}",,
+"env_biome","M","ENVO:{term}",,
+"env_feature","M","ENVO:{term}",,
+"env_material","M","ENVO:{term}",,
+"env_package","M","{term}","plant-associated",
+"alt","C","{float} m","altitude","the altitude of the sample is the vertical distance between Earth's surface above sea level and the sampled position in the air"
+"depth","C","{float} m","depth","depth is defined as the vertical distance below local surface, e.g. for sediment or soil samples depth is measured from sediment or soil surface, respectivly. Depth can be reported as an interval for subsurface samples"
+"elev","C","{float} {unit}","elevation","the elevation of the sampling site as measured by the vertical distance from mean sea level"
+"air_temp_regm","X","{float} {unit};{period};{interval};{period}","air temperature regimen","information about treatment involving an exposure to varying temperatures; should include the temperature, treatment duration, interval and total experimental duration; can include different temperature regimens"
+"antibiotic_regm","X","{text};{float} {unit};{period};{interval};{period}","antibiotic regimen","information about treatment involving antibiotic administration; should include the name of antibiotic, amount administered, treatment duration, interval and total experimental duration; can include multiple antibiotic regimens"
+"chem_administration","X","{term}; {timestamp}","chemical administration","list of chemical compounds administered to the host or site where sampling occurred, and when (e.g. antibiotics, N fertilizer, air filter); can include multiple compounds. For Chemical Entities of Biological Interest ontology (CHEBI) (v 111), http://purl.bioontology.org/ontology/CHEBI"
+"chem_mutagen","X","{text};{float} {unit};{period};{interval};{period}","chemical mutagen","treatment involving use of mutagens; should include the name of mutagen, amount administered, treatment duration, interval and total experimental duration; can include multiple mutagen regimens"
+"climate_environment","X","{text};{period};{interval};{period}","climate environment","treatment involving an exposure to a particular climate; can include multiple climates"
+"fertilizer_regm","X","{text};{float} {unit};{period};{interval};{period}","fertilizer regimen","information about treatment involving the use of fertilizers; should include the name fertilizer, amount administered, treatment duration, interval and total experimental duration; can include multiple fertilizer regimens"
+"fungicide_regm","X","{text};{float} {unit};{period};{interval};{period}","fungicide regimen","information about treatment involving use of fungicides; should include the name of fungicide, amount administered, treatment duration, interval and total experimental duration; can include multiple fungicide regimens"
+"gaseous_environment","X","{text};{float} {unit};{period};{interval};{period}","gaseous environment","use of conditions with differing gaseous environments; should include the name of gaseous compound, amount administered, treatment duration, interval and total experimental duration; can include multiple gaseous environment regimens"
+"gravity","X","{float} {unit};{period};{interval};{period}","gravity","information about treatment involving use of gravity factor to study various types of responses in presence, absence or modified levels of gravity; can include multiple treatments"
+"growth_hormone_regm","X","{text};{float} {unit};{period};{interval};{period}","growth hormone regimen","information about treatment involving use of growth hormones; should include the name of growth hormone, amount administered, treatment duration, interval and total experimental duration; can include multiple growth hormone regimens"
+"growth_med","X","[soil|liquid]","growth media","information about growth media for growing the plants or tissue cultured samples"
+"herbicide_regm","X","{text};{float} {unit};{period};{interval};{period}","herbicide regimen","information about treatment involving use of herbicides; information about treatment involving use of growth hormones; should include the name of herbicide, amount administered, treatment duration, interval and total experimental duration; can include multiple regimens"
+"host_age","X","{float} {unit}","host age","age of host at the time of sampling; relevant scale depends on species and study, e.g. could be seconds for amoebae or centuries for trees"
+"host_common_name","X","{text}","host common name","common name of the host, e.g. human"
+"host_disease_stat","X","{term}","host disease status","list of diseases with which the host has been diagnosed; can include multiple diagnoses. the value of the field depends on host; for humans the terms should be chosen from DO (Disease Ontology) at http://www.disease-ontology.org, other hosts are free text"
+"host_dry_mass","X","{float} {unit}","host dry mass","measurement of dry mass"
+"host_genotype","X","{text}","host genotype","observed genotype"
+"host_height","X","{float} {unit}","host height","the height of subject"
+"host_infra_specific_name","X","{text}","host infra-specific name","taxonomic information about the host below subspecies level"
+"host_infra_specific_rank","X","{text}","host infra-specific rank","taxonomic rank information about the host below subspecies level, such as variety, form, rank etc."
+"host_length","X","{float} {unit}","host length","the length of subject"
+"host_life_stage","X","{text}","host life stage","description of life stage of host"
+"host_phenotype","X","{term}","host phenotype","phenotype of host. For Phenotypic quality Ontology (PATO) (v 2013-10-28) terms, please see http://purl.bioontology.org/ontology/PATO"
+"host_taxid","X","{integer}","host taxid","NCBI taxon id of the host, e.g. 9606"
+"host_tot_mass","X","{float} {unit}","host total mass","total mass of the host at collection, the unit depends on host"
+"host_wet_mass","X","{float} {unit}","host wet mass","measurement of wet mass"
+"humidity_regm","X","{float} {unit};{period};{interval};{period}","humidity regimen","information about treatment involving an exposure to varying degree of humidity; information about treatment involving use of growth hormones; should include amount of humidity administered, treatment duration, interval and total experimental duration; can include multiple regimens"
+"mechanical_damage","X","{text};{text}","mechanical damage","information about any mechanical damage exerted on the plant; can include multiple damages and sites"
+"mineral_nutr_regm","X","{text};{float} {unit};{period};{interval};{period}","mineral nutrient regimen","information about treatment involving the use of mineral supplements; should include the name of mineral nutrient, amount administered, treatment duration, interval and total experimental duration; can include multiple mineral nutrient regimens"
+"misc_param","X","{text};{float} {unit}","miscellaneous parameter","any other measurement performed or parameter collected, that is not listed here"
+"non_mineral_nutr_regm","X","{text};{float} {unit};{period};{interval};{period}","non-mineral nutrient regimen","information about treatment involving the exposure of plant to non-mineral nutrient such as oxygen, hydrogen or carbon; should include the name of non-mineral nutrient, amount administered, treatment duration, interval and total experimental duration; can include multiple non-mineral nutrient regimens"
+"organism_count","X","{text};{float} {unit}","organism count","total count of any organism per gram or volume of sample, should include name of organism followed by count; can include multiple organism counts"
+"oxy_stat_samp","X","[aerobic|anaerobic]","oxygenation status of sample","oxygenation status of sample"
+"perturbation","X","{text};{interval}","perturbation","type of perturbation, e.g. chemical administration, physical disturbance, etc., coupled with time that perturbation occurred; can include multiple perturbation types"
+"pesticide_regm","X","{text};{float} {unit};{period};{interval};{period}","pesticide regimen","information about treatment involving use of insecticides; should include the name of pesticide, amount administered, treatment duration, interval and total experimental duration; can include multiple pesticide regimens"
+"ph_regm","X","{float};{period};{interval};{period}","pH regimen","information about treatment involving exposure of plants to varying levels of pH of the growth media; can include multiple regimen"
+"plant_body_site","X","{term}","plant body site","name of body site that the sample was obtained from. For Plant Ontology (PO) (v 20) terms, see http://purl.bioontology.org/ontology/PO"
+"plant_product","X","{text}","plant product","substance produced by the plant, where the sample was obtained from"
+"radiation_regm","X","{text};{float} {unit};{period};{interval};{period}","radiation regimen","information about treatment involving exposure of plant or a plant part to a particular radiation regimen; should include the radiation type, amount or intensity administered, treatment duration, interval and total experimental duration; can include multiple radiation regimens"
+"rainfall_regm","X","{float} {unit};{period};{interval};{period}","rainfall regimen","information about treatment involving an exposure to a given amount of rainfall; can include multiple regimens"
+"salt_regm","X","{text};{float} {unit};{period};{interval};{period}","salt regimen","information about treatment involving use of salts as supplement to liquid and soil growth media; should include the name of salt, amount administered, treatment duration, interval and total experimental duration; can include multiple salt regimens"
+"samp_salinity","X","{float} {unit}","sample salinity","salinity of sample, i.e. measure of total salt concentration"
+"samp_store_dur","X","{interval}","sample storage duration","duration for which sample was stored"
+"samp_store_loc","X","{text}","sample storage location","location at which sample was stored, usually name of a specific freezer/room"
+"samp_store_temp","X","{float} {unit}","sample storage temperature","temperature at which sample was stored, e.g. -80 degree Celsius"
+"samp_vol_we_dna_ext","X","{float} {unit}","sample volume or weight for DNA extraction","volume (mL) or weight (g) of sample processed for DNA extraction"
+"season_environment","X","{text};{period};{interval};{period}","seasonal environment","treatment involving an exposure to a particular season (e.g. winter, summer, rabi, rainy etc.)"
+"standing_water_regm","X","{text};{period};{interval};{period}","standing water regimen","treatment involving an exposure to standing water during a plant's life span, types can be flood water or standing water; can include multiple regimens"
+"temp","X","{float} {unit}","temperature","temperature of the sample at time of sampling"
+"tiss_cult_growth_med","X","{PMID|DOI|URL}","tissue culture growth media","description of plant tissue culture growth media used"
+"water_temp_regm","X","{float} {unit};{period};{interval};{period}","water temperature regimen","information about treatment involving an exposure to water with varying degree of temperature; can include multiple regimens"
+"watering_regm","X","{float} {unit};{period};{interval};{period}","watering regimen","information about treatment involving an exposure to watering frequencies; can include multiple regimens"
