@@ -13,16 +13,10 @@ library(RColorBrewer)
 samples = mongo(collection = "samples", db = "local", url = "mongodb://localhost:7755",
                 verbose = FALSE, options = ssl_options())
 
-#sequence = mongo(collection = "sequences", db = "local", url = "mongodb://localhost:7755",
-#                 verbose = FALSE, options = ssl_options())
-
 source("dbase.R")
 
 # allow uploading files up to 300MB
 options(shiny.maxRequestSize = 700*1024^3) 
-
-# show verbose ddpcr messages
-options(ddpcr.verbose = TRUE)
 
 source(file.path("server", "helpers.R"))
 
@@ -59,8 +53,7 @@ shinyServer(function(input, output, session) {
     proteomic = NULL
     
   )
-  
-
+ 
   status_Data <- function(){
     
     data <- samples$find(fields = '{
@@ -104,20 +97,7 @@ shinyServer(function(input, output, session) {
   
   output$analysis <- reactive({ FALSE })
   outputOptions(output, 'analysis', suspendWhenHidden = FALSE)
-  
-  observeEvent(dataValues$plate, {
-    shinyjs::toggle(id = "plateDirty", condition = is_dirty(dataValues$plate))
-  })
-  
-  # save button (download dataset) button is clicked
-  output$saveBtn <- downloadHandler( filename = function() {
-    dataValues$plate %>% name %>% normalize_to_rds
-  },
-  content = function(file) {
-    save_plate(dataValues$plate, file)
-  }
-  ) 
-  
+ 
   # When a main or secondary tab is switched, clear the error message
   # and don't show the dataset info on the About tab
   observe({
@@ -137,20 +117,6 @@ shinyServer(function(input, output, session) {
     hide("analyzeNextMsg")
   })
   
-  # whenever the plate gets updated, update the dataset info
-  observeEvent(dataValues$plate, {
-    # update the plate description
-    output$datasetDescName <- renderText(
-      dataValues$plate %>% name
-    )
-    output$datasetDescNumWells <- renderText(
-      dataValues$plate %>% wells_used %>% length
-    )
-    output$datasetDescNumDrops <- renderText(
-      dataValues$plate %>% plate_data %>% nrow %>% format(big.mark = ",")
-    )
-  })  
-  
   # include logic for each tab
   source(file.path("server", "tab-dataset.R"),   local = TRUE)$value
   source(file.path("server", "tab-settings.R"),  local = TRUE)$value
@@ -160,11 +126,5 @@ shinyServer(function(input, output, session) {
   # hide the loading message
   #Sys.sleep(2)  
   hide("loading-content", TRUE, "fade")  
-  
-  #TODO remove this , for testing purposes only
-  # dataValues$plate <- new_plate(dir = sample_data_dir(),
-  #                               type = plate_types$fam_positive_pnpp)
-  # 
-  # output$datasetChosen <- reactive({ TRUE })
-  # updateTabsetPanel(session, "mainNav", "settingsTab")
+ 
   })
