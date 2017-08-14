@@ -18,7 +18,6 @@ library(rsconnect) # for shinyapps.io #### necessary install.packages("devtools"
 # install.packages("rmarkdown") ### 
 library(shiny)
 library(shinyjs)
-library(ddpcr)
 library(rmarkdown)
 library(knitr)
 library(vegan)

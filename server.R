@@ -3,7 +3,6 @@
 
 library(shiny)
 library(shinyjs)
-library(ddpcr)
 library(DT)
 library(mongolite)
 library(dplyr)
