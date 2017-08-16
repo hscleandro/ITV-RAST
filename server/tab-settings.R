@@ -258,7 +258,7 @@ observeEvent(input$toAnalyze, {
       #cat("oldnames:",oldNames,"\n")
       #cat("newnames:",newNames,"\n")
       
-      newPath <- paste0("/srv/shiny-server/itv-rast/files/temp/",file)
+      newPath <- paste0("/srv/shiny-server/ITV-RAST/files/tmp/",file)
       #cat("newPath:",newPath,"\n")
   
       comand <- paste0("cp ",newNames," ",newPath)
