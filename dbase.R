@@ -13,33 +13,33 @@ insert_metegenomics_db <- function(input_path,project,sample,tool){
   #input_path <- '/home/leandro/Data/metagenomas/Lagoas/amendoim/posdata/AM1/LAKES-AM1_kaiju_names.out'
   if(tool == "kaiju")
   {
-    comand <- paste0("/usr/bin/python2.7 ", input_scripts_database,"kaiju_mongo.py -i ", input_path," -s ", sample," -p ", project)
+    comand <- paste0("python ", input_scripts_database,"kaiju_mongo.py -i ", input_path," -s ", sample," -p ", project)
     #cat("comand kaiju: ",comand,"\n")
   
   }
   else if(tool == "kaas")
   {
-    comand <- paste0("/usr/bin/python2.7 ", input_scripts_database,"kaas_mongo.py -i ", input_path," -s ", sample," -p ", project)
+    comand <- paste0("python ", input_scripts_database,"kaas_mongo.py -i ", input_path," -s ", sample," -p ", project)
     
   }
   else if(tool == "interpro")
   {
-    comand <- paste0("/usr/bin/python2.7 ", input_scripts_database,"interpro_mongo.py -i ", input_path," -s ", sample," -p ", project)
+    comand <- paste0("python ", input_scripts_database,"interpro_mongo.py -i ", input_path," -s ", sample," -p ", project)
   
   }
   else if(tool == "blast")
   {
-    comand <- paste0("/usr/bin/python2.7 ", input_scripts_database,"blast_mongo.py -i ", input_path," -s ", sample," -p ", project)
+    comand <- paste0("python ", input_scripts_database,"blast_mongo.py -i ", input_path," -s ", sample," -p ", project)
   
   }
   else if(tool == "proteomic")
   {
-    comand <- paste0("/usr/bin/python2.7 ", input_scripts_database,"proteomic-hit_mongo.py -i ", input_path," -s ", sample," -p ", project)
+    comand <- paste0("python ", input_scripts_database,"proteomic-hit_mongo.py -i ", input_path," -s ", sample," -p ", project)
     
   }
   else if(tool == "metadata")
   {
-    comand <- paste0("/usr/bin/python2.7 ", input_scripts_database,"insert_metadata.py -i ", input_path," -s ", sample," -p ", project)
+    comand <- paste0("python ", input_scripts_database,"insert_metadata.py -i ", input_path," -s ", sample," -p ", project)
     
   }
   #system(command = "pip install pandas", wait = TRUE)
