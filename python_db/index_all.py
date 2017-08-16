@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import pymongo as mongo
 
-client = MongoClient('localhost', 7755)
+client = MongoClient('mongoDB-Metagenomics', 27017)
 db = client.local
 collection = db.sequences
 collection_samples = db.samples

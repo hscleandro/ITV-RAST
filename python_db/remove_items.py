@@ -42,7 +42,7 @@ else:
             "\n\nErro: Parameter -t required for script execution. \n\nUse: python proteomic-hit_mongo.py --help for details.\n"
         )
 
-    client = MongoClient('localhost', 7755)
+    client = MongoClient('mongoDB-Metagenomics', 27017)
     db = client.local
     collection = db.sequences
     collection_sample = db.samples

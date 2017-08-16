@@ -63,7 +63,7 @@ else:
     else:
         print_time = False
 
-    client = MongoClient('localhost', 7755)
+    client = MongoClient('mongoDB-Metagenomics', 27017)
     db = client.local
     collection_sample = db.samples
     metadata_df = pd.read_csv(PATH_metadata, sep=",")

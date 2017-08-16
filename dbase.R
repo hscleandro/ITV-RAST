@@ -3,7 +3,7 @@
 #project <- "LAKES"
 #tool <- "kaiju"
 #insert_metegenomics_db(input,project,sample,tool)
-sequence = mongo(collection = "sequences", db = "local", url = "mongodb://localhost:7755",
+sequence = mongo(collection = "sequences", db = "local", url = "mongodb://mongoDB-Metagenomics:27017",
                  verbose = FALSE, options = ssl_options())
 
 insert_metegenomics_db <- function(input_path,project,sample,tool){
