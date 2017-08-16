@@ -7,7 +7,7 @@ sequence = mongo(collection = "sequences", db = "local", url = "mongodb://mongoD
                  verbose = FALSE, options = ssl_options())
 
 insert_metegenomics_db <- function(input_path,project,sample,tool){
-  input_scripts_database <- "/srv/shiny-server/itv-rast/metagenomics-database/"
+  input_scripts_database <- "/srv/shiny-server/ITV-RAST/python_db/"
   #sample <- "a1"
   #project <- "t1"
   #input_path <- '/home/leandro/Data/metagenomas/Lagoas/amendoim/posdata/AM1/LAKES-AM1_kaiju_names.out'
