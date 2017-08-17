@@ -48,7 +48,7 @@ insert_metegenomics_db <- function(input_path,project,sample,tool){
 }
 
 remove_metegenomics_db <- function(project,sample,tool){
-  input_scripts_database <- "/srv/shiny-server/itv-rast/metagenomics-database/"
+  input_scripts_database <- "/srv/shiny-server/ITV-RAST/python_db/"
   
   comand <- paste0("python ", input_scripts_database,"remove_items.py -s ", sample," -p ", project," -t ", tool)
   
