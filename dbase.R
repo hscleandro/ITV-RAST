@@ -1,20 +1,19 @@
-#input <- '/home/leandro/Data/metagenomas/Lagoas/tres_irmas/posdata/LTI11/LAKES-LTI11_kaiju_names.out'
-#sample <- "LTI11"
-#project <- "LAKES"
-#tool <- "kaiju"
 #insert_metegenomics_db(input,project,sample,tool)
-sequence = mongo(collection = "sequences", db = "local", url = "mongodb://mongoDB-Metagenomics:27017",
+config <- read.table(file = paste0(getwd(),'/setup.conf'))
+
+host <- config$V3[1]
+port <- as.numeric(config$V3[2])
+temp_var <- config$V3[3]
+input_scripts_database <- config$V3[4]
+
+sequence = mongo(collection = "sequences", db = "local", url = paste0("mongodb://",host,":",port),
                  verbose = FALSE, options = ssl_options())
 
 insert_metegenomics_db <- function(input_path,project,sample,tool){
-  input_scripts_database <- "/srv/shiny-server/ITV-RAST/python_db/"
-  #sample <- "a1"
-  #project <- "t1"
-  #input_path <- '/home/leandro/Data/metagenomas/Lagoas/amendoim/posdata/AM1/LAKES-AM1_kaiju_names.out'
+
   if(tool == "kaiju")
   {
     comand <- paste0("python ", input_scripts_database,"kaiju_mongo.py -i ", input_path," -s ", sample," -p ", project)
-    #cat("comand kaiju: ",comand,"\n")
   
   }
   else if(tool == "kaas")
@@ -48,7 +47,6 @@ insert_metegenomics_db <- function(input_path,project,sample,tool){
 }
 
 remove_metegenomics_db <- function(project,sample,tool){
-  input_scripts_database <- "/srv/shiny-server/ITV-RAST/python_db/"
   
   comand <- paste0("python ", input_scripts_database,"remove_items.py -s ", sample," -p ", project," -t ", tool)
   

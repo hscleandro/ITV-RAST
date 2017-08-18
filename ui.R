@@ -37,7 +37,12 @@ library(RColorBrewer)
 
 source(file.path("ui", "helpers.R"))
 
-samples = mongo(collection = "samples", db = "local", url = "mongodb://mongoDB-Metagenomics:27017",
+config <- read.table(file = paste0(getwd(),'/setup.conf'))
+
+host <- config$V3[1]
+port <- as.numeric(config$V3[2])
+
+samples = mongo(collection = "samples", db = "local", url = paste0("mongodb://",host,":",port),
               verbose = FALSE, options = ssl_options())
 
 tagList(

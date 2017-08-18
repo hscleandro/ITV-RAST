@@ -1,7 +1,23 @@
 from pymongo import MongoClient
 import pymongo as mongo
+import os
 
-client = MongoClient('mongoDB-Metagenomics', 27017)
+address = os.getcwd()
+collums = ["V1", "V2"]
+config_address = address.replace('python_db','') + 'setup.conf'
+
+config = pd.read_csv(config_address, sep="=", names=collums)
+
+port = config.iloc[1]["V2"]
+port = port.replace('"','')
+port = port.replace(' ', '')
+port = int(port)
+host = config.iloc[0]["V2"]
+host = host.replace('"', '')
+host = host.replace(' ', '')
+
+client = MongoClient(host, port)
+
 db = client.local
 collection = db.sequences
 collection_samples = db.samples

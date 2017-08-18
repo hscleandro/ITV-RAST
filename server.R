@@ -8,9 +8,14 @@ library(mongolite)
 library(dplyr)
 library(RColorBrewer)
 
+config <- read.table(file = paste0(getwd(),'/setup.conf'))
+
+host <- config$V3[1]
+port <- as.numeric(config$V3[2])
+temp_var <- config$V3[3]
 
 
-samples = mongo(collection = "samples", db = "local", url = "mongodb://mongoDB-Metagenomics:27017",
+samples = mongo(collection = "samples", db = "local", url = paste0("mongodb://",host,":",port),
                 verbose = FALSE, options = ssl_options())
 
 source("dbase.R")
